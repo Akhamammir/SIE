@@ -1,0 +1,232 @@
+<div class="Background">
+    <div *ngIf="Sector[0]">
+                <div *ngIf="selectedList == 'WiFi'">
+                    <div *ngFor='let circle of circles; let j=index' [id]="'op' + circle.id" class="Ovrly">
+                        <p style="margin-top: 10px; margin-left: 10px;">{{'AP '+circle.id}}</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Model: H310</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Location: Villa 20</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Install Date: 03-20-2019</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">IP: -</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">MAC: 2B:A2:9F:FF:34:22</p>
+                      </div>
+                        <!--<div id="op2" class="Ovrly">
+                          <p style="margin-top: 10px; margin-left: 10px;">Arbol 2</p>
+                          <p style="margin-top: 10px; margin-left: 10px;">Especie: Manzano</p>
+                          <p style="margin-top: 10px; margin-left: 10px;">Edad:10 años</p>
+                          <p style="margin-top: 10px; margin-left: 10px;">Jardinera: 23</p>
+                          <p style="margin-top: 10px; margin-left: 10px;">Cuadra: 14</p>
+                          <p style="margin-top: 10px; margin-left: 10px;">Expediente: M23C14</p>
+                        </div>-->
+                      <p-card styleClass="Card">
+                        <p-header (click)="Tabler('GUESTROOM', 'Guestrooms');">
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Guestrooms</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['GUESTROOM'] ? Totals['GUESTROOM'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                          <p class="CornerTag">{{Labels['ApGuest'].Progress}}%<!-- {{'PosX: '+mouseX+', PosY: '+mouseY}}--></p>
+                          <p class="CornerTagBot">{{Totals['GUESTROOM'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                        <!--<p-dropdown [options]="Docs[0]" [(ngModel)]="selectedCity1" styleClass="FileSlctr" filterPlaceholder="Dont be a fag!"></p-dropdown>
+                        <button pButton type="button" icon="fa fa-search-plus" (click)="return();"></button>
+                        <button pButton type="button" icon="fas fa-file-upload" (click)="return();"></button>-->
+                      </p-card>
+                      <p-card styleClass="Card2" (click)="Tabler('ARRIVAL', 'Arrivals');">
+                        <p-header>
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Arrivals</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['ARRIVAL'] ? Totals['ARRIVAL'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                          <p class="CornerTag">{{Labels['ApArrival'].Progress}}%</p>
+                          <p class="CornerTagBot">{{Totals['ARRIVAL'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card3" (click)="Tabler('RESIDENCIAS', 'Residential');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Residential</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['RESIDENCIAS'] ? Totals['RESIDENCIAS'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['ApRes'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals['RESIDENCIAS'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card4" (click)="Tabler('AREAS COMUNES', 'Common Areas');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem; overflow: hidden;" >Common Areas</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['AREAS COMUNES'] ? Totals['AREAS COMUNES'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['ApCommon'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals['AREAS COMUNES'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card5" (click)="Tabler('SPA', 'Spa');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Spa</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['SPA'] ? Totals['SPA'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['ApSpa'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals['SPA'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card6" (click)="Tabler('SERVICES', 'Services');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Services</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['SERVICES'] ? Totals['SERVICES'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['ApService'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals['SERVICES'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <div class="holder">
+                        <p-chart type="radar" [data]="data" width="100%" height="50vh"></p-chart>
+                      </div>
+                      <div class="holder" id="C2">
+                        <p-chart type="doughnut" [data]="data2" width="100%" height="50vh"></p-chart>
+                      </div>
+                      <!-- <div id="mydiv">
+  Include a header DIV with the same name as the draggable DIV, followed by "header"
+  <div id="mydivheader">Click here to move</div>
+  <p>Move</p>
+  <p>this</p>
+  <p>DIV</p>
+</div>-->
+                      <!--<canvas #Map class="Map" id="Map" (mousemove)="Fly($event)" width="1685" height="1210"></canvas>-->
+                </div>
+                <div *ngIf="selectedList == 'Switch'">
+                    <p-card styleClass="Card" (click)="Tabler('GUESTROOM', 'Guestrooms');">
+                        <p-header>
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Guestrooms</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['GUESTROOM'] ? Totals2['GUESTROOM'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                          <p class="CornerTag">{{Labels['SwGuest'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['GUESTROOM'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card2" (click)="Tabler('ARRIVAL', 'Arrivals');">
+                        <p-header>
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Arrivals</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['ARRIVAL'] ? Totals2['ARRIVAL'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                          <p class="CornerTag">{{Labels['SwArr'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['ARRIVAL'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card3" (click)="Tabler('RESIDENCIAS', 'Residential');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Residential</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['RESIDENCIAS'] ? Totals2['RESIDENCIAS'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['SwRes'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['RESIDENCIAS'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card4" (click)="Tabler('AREAS COMUNES', 'Common Areas');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Common Areas</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['AREAS COMUNES'] ? Totals2['AREAS COMUNES'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['SwCom'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['AREAS COMUNES'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card5" (click)="Tabler('CASITAS', 'Casitas');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Casitas</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['CASITAS'] ? Totals2['CASITAS'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['SwCas'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['CASITAS'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card6" (click)="Tabler('SERVICES', 'Services');">
+                        <p-header>
+                        <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >Services</b></p>
+                        <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['SERVICES'] ? Totals2['SERVICES'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                        <p class="CornerTag">{{Labels['SwSer'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['SERVICES'].Done  + ' Terminados'}}</p>
+                        </p-header>
+                      </p-card>
+                      <p-card styleClass="Card7" (click)="Tabler('GATEHOUSES', 'GateHouses');">
+                          <p-header>
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >GateHouses</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['GATEHOUSES'] ? Totals2['GATEHOUSES'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                          <p class="CornerTag">{{Labels['SwCas'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['GATEHOUSES'].Done  + ' Terminados'}}</p>
+                          </p-header>
+                      </p-card>
+                      <p-card styleClass="Card8" (click)="Tabler('MCR', 'MCR');">
+                          <p-header>
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >MCR</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals2['MCR'] ? Totals2['MCR'].Total + ' Switch': 'Loading...'}}</b></p><br/><br/>
+                          <p class="CornerTag">{{Labels['SwMcr'].Progress}}%</p>
+                        <p class="CornerTagBot">{{Totals2['MCR'].Done  + ' Terminados'}}</p>
+                          </p-header>
+                      </p-card>
+                      <div class="holder SwG">
+                        <p-chart type="radar" [data]="data3" width="100%" height="43vh"></p-chart>
+                      </div>
+                      <div class="holder SwG" id="C2">
+                        <p-chart type="doughnut" [data]="data4" width="100%" height="43vh"></p-chart>
+                      </div>
+                      <!--<p-card styleClass="Card9" (click)="Tabler('MCR');">
+                          <p-header>
+                          <p style="margin-left: 15px;"><b style="font-size: 1.3rem" >MCR</b></p>
+                          <p style="margin-left: 15px; color: #3CC480"><b>{{Totals['MCR'] ? Totals['MCR'].Total + ' WAP': 'Loading...'}}</b></p><br/><br/>
+                          <p-progressBar showValue=false [value]="Totals['MCR'] ? (Totals['MCR'].Done/Totals['MCR'].Total) : 0 "></p-progressBar>
+                          <p class="CornerTag">{{Labels[0].Progress}}%</p>
+                          <p class="StartTag"><b>0%</b></p>
+                          <p class="EndTag"><b>100%</b></p>
+                          </p-header>
+                        </p-card>-->
+                </div>
+            </div>
+            <div *ngIf=Sector[1]>
+                <p-dialog header="Title" modal="true" [closable]="false" [(visible)]="display" [showHeader]="false" styleClass="Diag">
+                    <p-progressSpinner [strokeWidth]="8"></p-progressSpinner>
+                </p-dialog>
+                <br/><br/>
+                <br/>
+                <p-table [value]="APs">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width:60px;">Item #</th>
+                      <th style="width:150px;">Location</th>
+                      <th style="width:150px;">Serial</th>
+                      <th style="width:150px;">Mac</th>
+                      <th style="width:150px;">IP Add</th>
+                      <th style="width:110px;">Install Date</th>
+                      <th style="width:250px;">Gallery</th>
+                      <th style="width:70px;">Matrix ID</th>
+                      <th style="width:120px;">Tag</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-AP>
+                    <tr>
+                      <td>{{AP.ID}}</td>
+                      <td>{{AP.Location}}</td>
+                      <td>{{AP.Serial}}</td>
+                      <td>{{AP.MAC}}</td>
+                      <td>{{AP.IP}}</td>
+                      <td>{{AP.InstallDate | date:'medium'}}</td>
+                      <td><p-lightbox [images]="AP.Galleria"></p-lightbox></td>
+                      <td pEditableColumn>
+                        <p-cellEditor>
+                          <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="AP.Matrix" (blur)="UpdateAP(AP.ID, AP.Matrix)">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                            {{AP.Matrix}}
+                          </ng-template>
+                        </p-cellEditor>
+                      </td>
+                      <td pEditableColumn>
+                        <p-cellEditor>
+                          <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="AP.Matrix" (blur)="UpdateAPtag(AP.ID, AP.Tag)">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                            {{AP.Tag}}
+                          </ng-template>
+                        </p-cellEditor>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <br/><br/>
+            </div>
+</div>
+<div class="menu">
+  <span>
+      <p-breadcrumb [model]="Trail" styleClass="Trailer"></p-breadcrumb>
+  </span>
+  <p-selectButton [options]="Menus" [(ngModel)]="selectedList" (ngModelChange)="Sectorer()" class="Sectorer" *ngIf="!Sector[1]"></p-selectButton>
+  <button pButton type="button" label="Return" (click)="return();" *ngIf="!Sector[0]"></button>
+  <label class="Name">{{'Hello , '+Name}}</label>
+</div>
+<p-toast></p-toast>

@@ -1,0 +1,305 @@
+<br/><br/>
+<p-tabView [style]="{'min-width':'100rem'}">
+    <p-tabPanel header="Estadisticas">
+        <div *ngIf="State.main">
+            <p-card [style]="{'box-shadow':' 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+            0 1px 18px 0 rgba(0, 0, 0, 0.12),
+            0 3px 5px -1px rgba(0, 0, 0, 0.4)'
+            }">
+                <h3 class="first">Ventas</h3>
+                <p-selectButton [options]="years" [(ngModel)]="Year" (ngModelChange)="setup(Year)"></p-selectButton>
+                <p-selectButton [options]="types" [(ngModel)]="Month[0]"></p-selectButton>
+                <br/><br/>
+                <p-table [columns]="cols" [value]="sels[Month[0]]">
+                    <ng-template pTemplate="caption">
+                        Ejecutivos
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Exe.replace('_',' ')}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Quote | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td (click)="Month[0] == 0 ? Go('Facts', rowData.Exe) : Go('Monthly', rowData.Exe, Month[0])" [ngClass]="rowData.Util > rowData.Quote ? 'util' :'LabelClick'">
+                                {{rowData.Util | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="Painter(rowData.Comp*100)">
+                                {{rowData.Comp | percent:'1.0-2'}}
+                            </td>
+                            <td (click)="Month[0] == 0 ? Go('Facts', rowData.Exe) : Go('Monthly', rowData.Exe, Month[0])" [ngClass]="'fact'">
+                                {{rowData.FactP | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td (click)="Month[0] == 0 ? Go('Facts', rowData.Exe) : Go('Monthly', rowData.Exe, Month[0])" [ngClass]="'fact'">
+                                {{rowData.FactD | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.CotP | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.CotD | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        {{(Month[0]==0 ? 'Utilidad Total' : 'Utilidad Mensual')}}: {{ Summer(sels[Month[0]], 'Util') | currency:'USD' : symbol:'1.2' }}, {{ Month[0]==0 ? 'Facturado en Pesos Total' : 'Facturado en Pesos Mensual' }}: {{ Summer(sels[Month[0]], 'FactP') | currency:'USD' : symbol:'1.2' }}, {{ Month[0]==0 ? 'Facturado en Dolares Total' : 'Facturado en Dolares Mensual' }}: {{ Summer(sels[Month[0]], 'FactD') | currency:'USD' : symbol:'1.2' }}
+                    </ng-template>
+                </p-table>
+            </p-card>
+            <br/><br/>
+            <p-card [style]="{'box-shadow':' 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+            0 1px 18px 0 rgba(0, 0, 0, 0.12),
+            0 3px 5px -1px rgba(0, 0, 0, 0.4)'}">
+                <h3 class="first">Servicio</h3>
+                <p-selectButton [options]="types" [(ngModel)]="Month[1]"></p-selectButton>
+                <br/><br/>
+                <p-table [columns]="cols" [value]="serves[Month[1]]">
+                    <ng-template pTemplate="caption">
+                        Ingenieros
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Exe.replace('_', ' ')}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Quote | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td (click)="Month[0] == 0 ? Go('Facts', rowData.Exe) : Go('Monthly', rowData.Exe, Month[1])" [ngClass]="rowData.Util > rowData.Quote ? 'util' :'LabelClick'">
+                                {{rowData.Util | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="Painter(rowData.Comp*100)">
+                                {{rowData.Comp | percent:'1.0-2'}}
+                            </td>
+                            <td (click)="Month[0] == 0 ? Go('Facts', rowData.Exe) : Go('Monthly', rowData.Exe, Month[1])" [ngClass]="'fact'">
+                                {{rowData.FactP | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td (click)="Month[0] == 0 ? Go('Facts', rowData.Exe) : Go('Monthly', rowData.Exe, Month[1])" [ngClass]="'fact'">
+                                {{rowData.FactD | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.CotP | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.CotD | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        {{(Month[1]==0 ? 'Utilidad Total' : 'Utilidad Mensual')}}: {{ Summer(serves[Month[1]], 'Util') | currency:'USD' : symbol:'1.2' }}, {{ Month[1]==0 ? 'Facturado en Pesos Total' : 'Facturado en Pesos Mensual' }}: {{ Summer(serves[Month[1]], 'FactP') | currency:'USD' : symbol:'1.2' }}, {{ Month[1]==0 ? 'Facturado en Dolares Total' : 'Facturado en Dolares Mensual' }}: {{ Summer(serves[Month[1]], 'FactD') | currency:'USD' : symbol:'1.2' }}
+                    </ng-template>
+                </p-table>
+            </p-card>
+            <br/><br/>
+            <p-card [style]="{'box-shadow':' 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+            0 1px 18px 0 rgba(0, 0, 0, 0.12),
+            0 3px 5px -1px rgba(0, 0, 0, 0.4)'}">
+                <h3 class="first">Compras</h3>
+                <!--<p-selectButton [options]="types" [(ngModel)]="Hi"></p-selectButton>-->
+                <br/><br/>
+                <p-table [columns]="cols2" [value]="Buys">
+                    <ng-template pTemplate="caption">
+                        Compras
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Cant}}
+                            </td>
+                            <td (click)="Go('POs')" [ngClass]="'fact'">
+                                {{rowData.Total | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.PC}}
+                            </td>
+                            <td (click)="Go('NoPOs')" [ngClass]="'fact'">
+                                {{rowData.MPC | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+            <br/><br/>
+            <p-card [style]="{'box-shadow':' 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+            0 1px 18px 0 rgba(0, 0, 0, 0.12),
+            0 3px 5px -1px rgba(0, 0, 0, 0.4)'}">
+                <h3 class="first">Facturacion</h3>
+                <!--<p-selectButton [options]="types" [(ngModel)]="Hi"></p-selectButton>-->
+                <br/><br/>
+                <p-table [columns]="cols2" [value]="Facts">
+                    <ng-template pTemplate="caption">
+                        Facturas
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Cant}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.Total | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.PC}}
+                            </td>
+                            <td [ngClass]="'Label'">
+                                {{rowData.MPC | currency:'USD' : symbol:'1.2'}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+        </div>
+        <div *ngIf="State.sell">
+            <p-breadcrumb [model]="Path" [home]="home"></p-breadcrumb>
+            <p-table #dt [columns]="colu" [value]="Tables">
+                <ng-template pTemplate="caption">
+                        <!--<button type="button" pButton icon="fa-file-o" iconPos="left" label="All Data" (click)="dt.exportCSV()" style="float:left"></button>-->
+                    Facturas
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            {{col.header}}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData">
+                            <td [ngClass]="'Label'">
+                                <button type="button" pButton (click)="FactsPDF(rowData.ID)" icon="fa fa-search-plus " style="cursor:pointer;float:left;"></button>
+                            </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.ID}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Facted}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Date}}
+                        </td>
+                        <td (click)="Go('Filtered',rowData.Cli)" [ngClass]="'fact'">
+                            {{rowData.Cli}}
+                        </td>
+                        <td  [ngClass]="'Label'">
+                            {{rowData.FactP | currency:'USD' : symbol:'1.2'}}
+                        </td>
+                        <td  [ngClass]="'Label'">
+                            {{rowData.FactD | currency:'USD' : symbol:'1.2'}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Util | currency:'USD' : symbol:'1.2'}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Exe.replace('_',' ')}}
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                        {{(Month[0]==0 ? 'Utilidad Total' : 'Utilidad Mensual')}} : {{(Summer(Tables, 'Util')) | currency:'USD' : symbol:'1.2'}}, {{(Month[0]==0 ? 'Facturado Total' : 'Facturado Mensual')}}: {{(Summer(Tables, 'Fact')) | currency:'USD' : symbol:'1.2'}}
+                </ng-template>
+            </p-table>
+        </div>
+        <div *ngIf="State.Po">
+            <p-breadcrumb [model]="Path" [home]="home"></p-breadcrumb>
+            <p-table #dt [columns]="comps" [value]="Tables">
+                <ng-template pTemplate="caption">
+                        <!--<button type="button" pButton icon="fa-file-o" iconPos="left" label="All Data" (click)="dt.exportCSV()" style="float:left"></button>-->
+                    Compras
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            {{col.header}}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData">
+                        <td [ngClass]="'Label'">
+                            <button type="button" pButton (click)="FactsPDF(rowData.Of)" icon="fa fa-search-plus " style="cursor:pointer;float:left;"></button>
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Of}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.dateF | date:'mediumDate'}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Oc}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{(rowData.dateC == 'Invalid Date' || rowData.dateC == '-' ? 'N/A' : (rowData.dateC | date:'mediumDate'))}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Unit}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Desc}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Cli}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{(rowData.MountP=='-'? 'No procesada' :  rowData.MountP | currency:'USD' : symbol:'1.2')}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{(rowData.MountD=='-'? 'No procesada' :  rowData.MountD | currency:'USD' : symbol:'1.2')}}
+                        </td>
+                        <td [ngClass]="'Label'">
+                            {{rowData.Time}} Dias
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                        {{(Month[0]==0 ? 'Utilidad Total' : 'Utilidad Mensual')}} : {{(Summer(Tables, 'Util')) | currency:'USD' : symbol:'1.2'}}, {{(Month[0]==0 ? 'Facturado Total' : 'Facturado Mensual')}}: {{(Summer(Tables, 'Fact')) | currency:'USD' : symbol:'1.2'}}
+                </ng-template>
+            </p-table>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Graficas">
+        <p-card [style]="{'box-shadow':' 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+        0 1px 18px 0 rgba(0, 0, 0, 0.12),
+        0 3px 5px -1px rgba(0, 0, 0, 0.4)'}">
+        <h3 class="first">Compras</h3>
+                <br/><br/>
+            <p-chart type="doughnut" [data]="data2"></p-chart>
+        </p-card>
+        <br/><br/>
+        <p-card [style]="{'box-shadow':' 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+        0 1px 18px 0 rgba(0, 0, 0, 0.12),
+        0 3px 5px -1px rgba(0, 0, 0, 0.4)'}">
+        <h3 class="first">Facturacion</h3>
+                <br/><br/>
+            <p-chart type="doughnut" [data]="data3"></p-chart>
+        </p-card>
+    </p-tabPanel>
+</p-tabView>

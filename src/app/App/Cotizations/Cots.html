@@ -1,0 +1,354 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="{{GO ? 'Facturacion':'Cotizacion'}}" styleClass="Legendary">
+    <p-sidebar [(visible)]="Calc" position="left" [baseZIndex]="10000" [style]="{width:'20%', height:'60%', top:'30%'}">
+        <input type="text" pInputText />
+        <hr style="opacity:0.7"/>
+        <button pButton type="button" (click)="Calc = true" label="7"></button>
+        <button pButton type="button" (click)="Calc = true" label="8"></button>
+        <button pButton type="button" (click)="Calc = true" label="9"></button>
+        <button pButton type="button" (click)="Calc = true" label="*"></button>
+        <br/><br/>
+        <button pButton type="button" (click)="Calc = true" label="4"></button>        
+        <button pButton type="button" (click)="Calc = true" label="5"></button>
+        <button pButton type="button" (click)="Calc = true" label="6"></button>
+        <button pButton type="button" (click)="Calc = true" label="+" style="width:2.7rem;"></button>
+        <br/><br/>
+        <button pButton type="button" (click)="Calc = true" label="7"></button>
+        <button pButton type="button" (click)="Calc = true" label="8"></button>
+        <button pButton type="button" (click)="Calc = true" label="9"></button>
+        <button pButton type="button" (click)="Calc = true" label="/"></button>
+    </p-sidebar>
+    <p-overlayPanel #mop (blur)="mop.hide()" [dismissable]="true" [style]="{'marginTop':'20px'}">
+        <p-dataList [value]="FABook" [rows]="6">
+            <ng-template let-Add pTemplate="item">
+                <button pButton type="button" label="Elegir" class="ui-button-info"></button>
+                <label class="Usr">{{Add}}</label>
+            </ng-template>
+        </p-dataList>
+    </p-overlayPanel>
+    <p-dialog header="sdafsdfa" [(visible)]="Mail" [width]="750" [height]="750" >
+        <p-chips [(ngModel)]="Dest" placeholder="Destinatario(s)" allowDuplicate="false"></p-chips>
+        <p-chips [(ngModel)]="Cops" placeholder="CC" allowDuplicate="false"></p-chips>
+        <p-chips [(ngModel)]="Hids" placeholder="CCo" allowDuplicate="false"></p-chips>
+        <hr style="opacity:0.7"/>
+        <p-editor [(ngModel)]="MBody" [style]="{'height':'30rem'}" *ngIf="Mail"></p-editor>
+        <button pButton type="button" icon="far fa-paper-plane" label="Enviar" (click)="Mailer()" [disabled]="Dest.length==0||!MBody"></button>
+    </p-dialog>
+    <!--<button pButton type="button" (click)="Calc = true" icon="fas fa-calculator" class="FAB"></button>-->
+    <p-contextMenu #cm [model]="items"></p-contextMenu>
+    <p-overlayPanel #op (blur)="op.hide()" [dismissable]="true" [style]="{'marginTop':'3px'}">
+        <p-dataList [value]="P2" [rows]="5">
+            <ng-template let-Pro pTemplate="item">
+                <button pButton type="button" (click)="One(Majora, Minora, opTwo.visible ? '' : FF, op, Pro[Field])" label="Elegir" class="ui-button-info"></button>
+                <label class="Usr">{{Pro[Field]}}</label>
+            </ng-template>
+        </p-dataList>
+    </p-overlayPanel>
+    <p-overlayPanel #opTwo [dismissable]="false" [showCloseIcon]="true" [style]="{'width':'50%'}">
+        <p-dataTable [value]="B[IDM].D[IDm].C" [immutable]="false" columnResizeMode="expand" [editable]="true">
+            <p-column styleClass="col-button" [style]="{'width':'3rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body" style="width:2rem">
+                    <button pButton type="button" icon="fa fa-times" (click)="Killer(IDM, IDm, i)"></button>
+                </ng-template>
+            </p-column>
+            <p-column field="PartN" header="Num. Parte" [editable]="true">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Arr(P,De[col.field], Field, De.ID)" (focus)="OPer($event, IDM, IDm, op, P, 'PartNo', 'Unit', i)" required="true"/>
+                </ng-template>
+            </p-column>
+            <p-column field="Des" header="Desc." [editable]="true">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Arr(P,De[col.field], Field, De.ID)" (focus)="OPer($event, IDM, IDm, op, P, 'ShortD', 'Desc', i)" required="true"/>
+                </ng-template>
+            </p-column>
+            <p-column field="Cto" header="Costo" [editable]="true">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="this.B[IDM].D[IDm].C[i].Fin = this.B[IDM].D[IDm].C[i].Cto * this.B[IDM].D[IDm].C[i].TC; Runner()" required="true"/>
+                </ng-template>
+            </p-column>
+            <p-column field="TC" header="Tasa de cambio" [editable]="true">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="this.B[IDM].D[IDm].C[i].Fin = this.B[IDM].D[IDm].C[i].Cto * this.B[IDM].D[IDm].C[i].TC; Runner()" required="true"/>
+                </ng-template>
+            </p-column>
+            <p-column field="Fin" header="Costo Neto" [editable]="false">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" required="true"/>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+        <button pButton type="button" icon="fa fa-plus" (click)="B[IDM].D[IDm].C.push({PartN:'',Des:'',Cto:0,TC:1,Fin:0})"></button><br/><br/>
+    </p-overlayPanel>
+    <label class="Blk">Cotizacion: </label><label class="Red" >{{N}}</label><label class="Blk">Cotizacion Vigente Hasta: </label><p-calendar id="CCal" [(ngModel)]="CDate" dateFormat="dd-mm-yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="2016:2050" [style]="{'vertical-align':'super'}"></p-calendar><br/><label class="Usr">{{GO ? T : 'Nombre de cotizacion:'}}</label><input type="text" id="CotL" pInputText [(ngModel)]="T" (ngModelChange)="Styler('CotL','T')" *ngIf="!GO" required="true"/><br/><br/>
+    <label class="Usr" *ngIf="!GO">Empresa:</label><p-dropdown id="CDrop" [options]="Cl" [(ngModel)]="Clnt" [style]="{'width':'25rem','right':'0.4rem'}" (onChange)="Sel()" [filter]="true" placeholder="Seleccione un cliente" *ngIf="!GO"></p-dropdown><label class="Usr" *ngIf="GO">Entregar en:</label><p-dropdown [options]="DelAdds" [(ngModel)]="DeliveryA" *ngIf="GO" editable="true" placeholder="Ingresa el lugar de entrega"></p-dropdown><br/><br/>
+        <label class="Usr" *ngIf="!GO">Contacto:</label><p-dropdown [options]="Cc" [(ngModel)]="Cnt" [style]="{'width':'25rem','right':'0.4rem'}" (onChange)="Set()" *ngIf="!GO"></p-dropdown><label class="Usr" *ngIf="GO">Atencion a:</label><p-dropdown [options]="DelResp" [(ngModel)]="Atn" *ngIf="GO" editable="true" placeholder="Ingresa el responsable de recibir"></p-dropdown><br/><br/>
+        <label class="Usr">{{GO ? 'Facturacion en' :'Cotizacion en:'}}</label><p-toggleButton onLabel="Dolares" offLabel="Pesos " [(ngModel)]="Co" [style]="{'width':'5rem'}" (onChange)="Coiner()"></p-toggleButton><label class="Usr">Tipo de cambio:</label><input type="text" id="Coin" pInputText [(ngModel)]="Coin" (ngModelChange)="TcS=Coin;Styler('Coin', 'Coin')" required="true"/><label class="Usr">*Tipo de cambio cuando el cliente se le vende en dolares </label><br/><br/>
+        <div *ngIf="!GO"><br/><br/></div>
+        <div *ngIf="GO">
+            <label class="Usr">Rfc:</label><p-inputMask [(ngModel)]="RFC" mask="aaa-*-99-999-***?*" *ngIf="GO" [disabled]="Picked" id="Coin"></p-inputMask><br/><br/>
+            <label class="Usr">Metodo de Pago:</label><p-dropdown id="CDrop" [options]="PayMet" [(ngModel)]="MetPag" [style]="{'width':'25rem','right':'0.4rem'}" [filter]="true" placeholder="Seleccione un metodo de pago"></p-dropdown><br/><br/>
+            <label class="Usr">Uso de CFDI:</label><p-dropdown id="CDrop" [options]="Cfdi" [(ngModel)]="CFDIUse" [style]="{'width':'25rem','marginLeft':'1.4rem'}" [filter]="true" placeholder="Seleccione un uso de CFDI"></p-dropdown><br/><br/>
+            <label class="Usr">Forma de pago:</label><p-dropdown id="CDrop" [options]="PayFor" [(ngModel)]="ForPag" [style]="{'width':'25rem','marginLeft':'0.1rem'}" [filter]="true" placeholder="Seleccione una forma de pago"></p-dropdown>
+            <br/><br/>
+        </div>
+    <p-dataTable [value]="X" [editable]="true" [responsive]="false" [style]="{'width':'40%'}" [tableStyle]="{'table-layout':'auto'}">
+        <p-column header="Datos del cliente" colspan="2" field="Ro" [editable]="false" [style]="{'width':'10%', 'background-color':'cornflowerblue', 'color':'#F2F3F4', 'border':'1'}"></p-column>
+        <p-column field="fill" [editable]="true" styleClass="Headless" id="sd"></p-column>
+    </p-dataTable>
+    <br/><br/>
+    <div *ngFor='let A of B; let j=index' >
+        <label class="Usr">{{GO ? A.Nom : 'Grupo: '}}</label><input type="text" id="CotG" pInputText [(ngModel)]="A.Nom" *ngIf="!GO" /><br/><br/>
+        <!--Cant:'',Unit:'',Desc:'',CInicial:'',Dcto:'',Utilidad:'',Ctot:'',DeliveryC:'',DeliveryT:''-->
+        <p-table [value]="A.D" [(selection)]="Gen" id="Cot">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:120px;background-color: cornflowerblue;" *ngIf="!GO" >
+                        <div class="ui-inputgroup" style="margin:.1cm;">
+                            <button pButton type="button" icon="fa fa-times" (click)="Killer(j)" style="cursor:pointer;float:left;background-color: #F2F3F4;color: cornflowerblue;border: 0;"></button>
+                            <button type="button" pButton (click)="Modifyer(j, null,0)" icon="fa fa-clone" style="cursor:pointer;float:left;background-color: #F2F3F4;color: cornflowerblue;border: 0;"></button>
+                            <button type="button" pButton (click)="Modifyer(j, null,1)" icon="fa fa-level-down" style="cursor:pointer;float:left;background-color: #F2F3F4;color: cornflowerblue;border: 0;"></button>
+                        </div>
+                    </th>
+                    <th style="width: 3em;background-color: cornflowerblue;" *ngIf="GO">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th style="width:80px; background-color: cornflowerblue;color: white;">Cant.</th>
+                    <th style="width:170px;background-color: cornflowerblue;color: white;">Unidad/Num Parte</th>
+                    <th style="width:300px;background-color: cornflowerblue;color: white;">Descripcion</th>
+                    <th style="width:135px;background-color: cornflowerblue;color: white;">Proveedor</th>
+                    <th style="width:155px;background-color: cornflowerblue;color: white;" *ngIf="!GO">Costo</th>
+                    <th style="width:355px;background-color: cornflowerblue;color: white;" *ngIf="GO">Costo</th>
+                    <th style="width:100px;background-color: cornflowerblue;color: white;" *ngIf="!GO">Descuento</th>
+                    <th style="width:100px;background-color: cornflowerblue;color: white;" *ngIf="!GO">Utilidad</th>
+                    <th style="width:120px;background-color: cornflowerblue;color: white;">Gastos de envio</th>
+                    <th style="width:110px;background-color: cornflowerblue;color: white;">Precio Unitario</th>
+                    <th style="width:110px;background-color: cornflowerblue;color: white;">Costo total</th>
+                    <th style="width:355px;background-color: cornflowerblue;color: white;" *ngIf="GO">Utilidad Neta</th>
+                    <th style="width:170px;background-color: cornflowerblue;color: white;">Tiempo de Entrega</th>
+                    <th style="width:220px;background-color: cornflowerblue;color: white;">Commentarios</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+                <tr [pSelectableRow]="rowData">
+                    <td *ngIf="!GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <div class="ui-inputgroup" style="margin:.1cm;">
+                            <button pButton type="button" icon="fa fa-times" (click)="Killer(j, i)"></button>
+                            <button type="button" pButton (click)="Modifyer(i,j,2)" icon="fa fa-clone" style="cursor:pointer;float:left;"></button>
+                            <button type="button" pButton (click)="Modifyer(i,j)" icon="fa fa-level-down" style="cursor:pointer;float:left;"></button>
+                        </div>
+                    </td>
+                    <td *ngIf="GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td pEditableColumn style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #fe9920" id="{{ 'Cant-' + j + '-' + rowData.ID }}">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.Cant" (ngModelChange)="Upper(j,rowData.ID);Uti(j,rowData.ID);Styler('Cant-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'Cant')" [style]="{'width':'100%'}" required="true" (blur)="blur($event)"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.Cant }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input" >
+                                <input [(ngModel)]="rowData.Unit" (focus)="OPer($event, j, i, op, P, 'PartNo', 'Unit')" [style]="{'width':'100%'}" required="false" (blur)="blur($event)" [disabled]="GO"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.Unit }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <textarea pInputTextarea [(ngModel)]="rowData.Desc" (ngModelChange)="Arr(P, rowData.Desc , Field)" (focus)="OPer($event, j, i, op, P, 'ShortD', 'Desc')" rows="3" cols="40" [style]="{'width':'100%'}" autoResize="autoResize" (blur)="blur($event)" [disabled]="GO"></textarea>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.Desc }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.Prov" (ngModelChange)="Arr(Proveedores,rowData.Prov, Field)" (focus)="OPer($event, j, i, op, Proveedores, 'Alias', 'Prov')" [style]="{'width':'100%'}" required="false" (blur)="blur($event)"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.Prov }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn *ngIf="!GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #fe9920" id="{{ 'CInicial-' + j + '-' + rowData.ID }}">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.CInicial" (ngModelChange)="Upper(j,rowData.ID);Uti(j,rowData.ID);Styler('CInicial-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'CInicial')" [style]="{'width':'100%'}" required="true" (blur)="blur($event)"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ (Nani(rowData.CInicial) ? (rowData.CInicial | currency:'USD':'symbol':'1.2-2') : 'NaN')  }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td *ngIf="GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4" id="{{ 'CFact-' + j + '-' + rowData.ID }}">
+                        <div class="ui-inputgroup" >
+                            <input pInputText [(ngModel)]="rowData.CFact" (ngModelChange)="End(j,rowData.ID);Uti(j,rowData.ID);Styler('CFact-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'CFact')" style="width:6rem;"/>
+                            <p-selectButton [options]="KOIN" [(ngModel)]="B[j].D[rowData.ID].Koin" (ngModelChange)=" End(j,rowData.ID);Uti(j,rowData.ID)"></p-selectButton>
+                            <span class="ui-inputgroup-addon" style="width:2.5rem;">TC</span>
+                            <input pInputText [(ngModel)]="B[j].D[rowData.ID].TC" (ngModelChange)=" End(j,rowData.ID);Uti(j,rowData.ID);Styler('CFact-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'TC')" style="width:4rem;"/>
+                            <button type="button" pButton (click)="Copier(B[j].D[rowData.ID].Prov, B[j].D[rowData.ID].TC);End(j,rowData.ID);Uti(j,rowData.ID)" icon="fa fa-clone" style="cursor:pointer;float:left;"></button>
+                        </div>
+                    </td>
+                    <td pEditableColumn *ngIf="!GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #fe9920" id="{{ 'Dcto-' + j + '-' + rowData.ID }}">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.Dcto" (ngModelChange)="Upper(j,rowData.ID);Uti(j,rowData.ID);Styler('Dcto-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'Dcto')" [style]="{'width':'100%'}" required="true" (blur)="blur($event)"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ (Nani(rowData.Dcto) ? ((rowData.Dcto/100) | percent:'1.2-2') : 'NaN') }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn *ngIf="!GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #fe9920" id="{{ 'Utilidad-' + j + '-' + rowData.ID }}">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.Utilidad" (ngModelChange)="Upper(j,rowData.ID);Uti(j,rowData.ID);Styler('Utilidad-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'Utilidad')" [style]="{'width':'100%'}" required="true" (blur)="blur($event)"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ (Nani(rowData.Utilidad) ? ((rowData.Utilidad/100) | percent:'1.2-2') : 'NaN')  }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn *ngIf="!GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #fe9920" id="{{ 'DeliveryC-' + j + '-' + rowData.ID }}">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.DeliveryC" (ngModelChange)="Upper(j,rowData.ID);Uti(j,rowData.ID);Styler('DeliveryC-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'DeliveryC')" [style]="{'width':'100%'}" required="true" (blur)="blur($event)"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ (Nani(rowData.DeliveryC) ? (rowData.DeliveryC | currency:'USD':'symbol':'1.2-2') : 'NaN')  }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn *ngIf="GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #fe9920" id="{{ 'DeliveryCF-' + j + '-' + rowData.ID }}">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input [(ngModel)]="rowData.DeliveryCF" (ngModelChange)="Upper(j,rowData.ID);Uti(j,rowData.ID);Styler('DeliveryCF-' + j + '-' + rowData.ID, 'B', j, rowData.ID, 'DeliveryCF')" [style]="{'width':'100%'}" required="true" (blur)="blur($event)"/>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ (Nani(rowData.DeliveryCF) ? (rowData.DeliveryCF | currency:'USD':'symbol':'1.2-2') : 'NaN')  }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                    <td style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        {{ (Nani(rowData.Ctot) ? ((rowData.Ctot/rowData.Cant) | currency:'USD':'symbol':'1.2-2') : 'NaN')  }}
+                    </td>
+                    <td style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        {{ (Nani(rowData.Ctot) ? (rowData.Ctot | currency:'USD':'symbol':'1.2-2') : 'NaN')  }}
+                    </td>
+                    <td *ngIf="GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        {{ Nani(rowData.UNet) ? (rowData.UNet | currency:'USD':true:'1.2-2') : 'NaN'}}
+                    </td>
+                    <td pEditableColumn style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input [(ngModel)]="rowData.DeliveryT" [style]="{'width':'100%'}" required="false" (blur)="blur($event)" [disabled]="GO"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.DeliveryT }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn *ngIf="!GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <textarea pInputTextarea [(ngModel)]="rowData.CommCot" rows="3" cols="40" [style]="{'width':'100%'}" autoResize="autoResize" (blur)="blur($event)"></textarea>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.CommCot }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn *ngIf="GO" style="box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <textarea pInputTextarea [(ngModel)]="rowData.Comm" rows="3" cols="40" [style]="{'width':'100%'}" autoResize="autoResize" (blur)="blur($event)"></textarea>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ rowData.Comm }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-table [value]="[B[j]]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="border:none;background: none;">
+                 
+            </th>
+            <th style="border:none;background: none;">
+                 
+            </th>
+            <th style="border:none;background: none;width: 375px;">
+                 
+            </th>
+            <th style="border:none;background: none;">
+                 
+            </th>
+            <th style="border:none;background: none;">
+                 
+            </th>
+            <th style="border:none;background: none;">
+                 
+            </th>
+            <th style="border:none;background: none;">
+                
+            </th>
+            <th style="border:none;background: none;">
+
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-b>
+        <tr>
+            <td style="border:none;background: none;">
+                
+            </td>
+            <td style="border:none;background: none;">
+                
+            </td>
+            <td style="border:none;background: none;">
+                
+            </td>
+            <td style="border:none;background: none;">
+                <b>Subtotal:</b> {{(Nani(b.SubT) ? (b.SubT | currency:'USD':'symbol':'1.2-2') : 'NaN')}}
+            </td>
+            <td style="border:none;background: none;">
+                <b>Utilidad Total:</b> {{(Nani(b.SubU) ? (b.SubU | currency:'USD':'symbol':'1.2-2') : 'NaN')}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+        <br/><br/>
+            <button pButton type="button" label="Agregar Linea" (click)="Prodder(j)" *ngIf="!GO"></button><br/><br/>
+    </div>
+    <button pButton type="button" label="Agregar Grupo" (click)="Modder()" *ngIf="!GO"></button>
+    <br/><br/>
+    <label class="Usr" *ngIf="!GO">Notas:</label>
+    <p-chips [(ngModel)]="Nt" *ngIf="!GO"></p-chips>
+    <br/>
+    <label class="Usr" *ngIf="!GO">Terminos Comerciales:</label>
+    <br/>
+    <textarea pInputTextarea [(ngModel)]="Tc" *ngIf="!GO" style="width:20rem;height:7rem;box-shadow: inset 1px 1px 2px 0 #707070;transition: box-shadow 0.3s;background-color: #F2F3F4"></textarea>
+    <br/>
+    <button pButton type="button" label="Aceptar" (click)="GO ? Warn() : this.Maker('Store!')" [disabled]="T.length == 0 || Coin.length== 0"></button>
+    <button pButton type="button" label="Visualizar" (click)="GO ? Facts('Hi'): Maker('Show!')"></button>
+    <button pButton type="button" label="Para Membretado" (click)="Maker('Show Alt!')" *ngIf="!GO"></button>
+    <button pButton type="button" label="{{GO ? 'Cancelar' : 'Generar orden de facturacion'}}" (click)="Builder()"></button>
+    <button pButton type="button" label="Generar copia de cotizacion" (click)="Maker('Copy!')" [disabled]="Fact||Coin==undefined||Coin==null"></button>
+    <button pButton type="button" icon="far fa-envelope" label="Enviar por correo" (click)="(Dest.length==0?Dest.push(X[4].fill) : Dest=Dest);Mail=!Mail;" [disabled]="T.length == 0 || Coin.length== 0|| X[4].fill.length==0"></button>
+</p-fieldset>

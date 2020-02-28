@@ -1,0 +1,17 @@
+<div id="Main">
+  <div id='Menu'>
+    <ul class="dropdownlink">
+      <li *ngFor='let A of B' (click)="A.command ? A.command() : List(A.label)" id="LEFT" (A)="Menuer()">
+        {{A.label}}
+        <ul [attr.id]="A.label" class="submenuItems">
+          <li *ngFor='let B of A.items' (click)="B.command()">
+            {{B.label}}
+            <hr class="Menu">
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <router-outlet id="RightRapp"></router-outlet>
+  <!--<ng-template let-col let-De="rowData" let-i="rowIndex" (click)="List()">-->
+</div>

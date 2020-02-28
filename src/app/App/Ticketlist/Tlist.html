@@ -1,0 +1,71 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header={{What}} [(visible)]="display" [responsive]="true" [width]="500" [minWidth]="200" [minY]="70" [contentStyle]="{'padding-left':'0', 'padding-right':'0'}" >
+    <h3 style="font-weight:lighter; font-family: 'Rales';vertical-align: middle;">{{Who}}</h3>
+    <h1 style="width: 100%; background-color: #008DD5;font-weight:lighter; font-family: 'Rales';vertical-align: middle;text-align:center;">{{When}}</h1>
+    <p-footer>
+        <span>{{Detail}}</span><br/>
+        <hr class="Menu">
+        <span pInplaceDisplay>
+                <label class="Usr" style="color:#c40000;font-weight: bold !important;">Notas: </label>
+                <span [ngClass]="A.Type" *ngFor='let A of Notes; let j=index'>{{A.Note}}</span>
+        </span><br/>
+        <p-inplace closable="closable" *ngIf="!status">
+            <span pInplaceDisplay>
+                <label class="Usr" style="color:#c40000;font-weight: bold !important;">Click para agregar notas</label>
+            </span>
+            <span pInplaceContent>
+                <div class="ui-inputgroup">
+                    <button pButton type="button" (click)="TNote='Success'" icon="pi pi-check" class="ui-button-success"></button> 
+                    <button pButton type="button" (click)="TNote='Info'" icon="pi pi-info-circle" class="ui-button-info"></button>
+                    <button pButton type="button" (click)="TNote='Error'" icon="pi pi-times" class="ui-button-danger"></button>
+                    <input type="text" pInputText [(ngModel)]="CNote" placeholder="Price">
+                    <span class="ui-inputgroup-addon"><i class="{{TNote == 'Success' ? 'pi pi-check': (TNote == 'Info' ? 'pi pi-info-circle' : 'pi pi-times') }}"></i></span>
+                    <button pButton type="button" (click)="ProcessNote()" label="Agregar" class="ui-button-info"></button>
+                </div>
+            </span>
+        </p-inplace>
+        <hr class="Menu">
+        <button pButton type="button" label="Ticket completado" (click)="Complete()" *ngIf="!status"></button>
+        <h3 style="font-weight:lighter; font-family: 'Rales';vertical-align: middle;" *ngIf="status">{{DateC}}</h3>
+    </p-footer>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de Ordenes de Facturacion">
+    <p-table [columns]="Cols" [value]="Cots"  [(selection)]="Send" [rows]="20" [paginator]="true" sortMode="none">
+        <ng-template pTemplate="caption">
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" [style]="{'width':'90rem'}"></p-chips>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td>
+                    <button type="button" pButton (click)="Show(rowData.Owner, rowData.title, rowData.start, rowData.Description, rowData.status, rowData.statusdate, rowData.Notes)" icon="fa fa-search-plus " style="cursor:pointer;float:left;"></button>
+                    <button type="button" pButton (click)="Warn(rowData.start)" icon="fa fa-times" style="cursor:pointer;float:left;"></button>
+                </td>
+                <td>
+                    {{rowData.title.replace('_',' ')}}
+                </td>
+                <td>
+                    <label class="Usr">{{ rowData.start| date:'mediumDate'}}</label>
+                </td>
+                <td>
+                    <label class="Usr">{{ rowData.status ? 'Completado' : 'En Proceso'}}</label>
+                </td>
+                <td>
+                    Dias Transcurridos: {{Day(rowData.start, (rowData.status ? rowData.statusdate : '')) }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <br/>
+</p-fieldset>

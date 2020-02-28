@@ -1,0 +1,64 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca el nuevo nombre</label><br/>
+    <input type="text" size="30" pInputText [(ngModel)]="E">
+    <button type="button" pButton (click)="Pop=false" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Registro de Facturacion y altas">
+    <p-table [columns]="Cols" [value]="Cots"  [(selection)]="Send" [rows]="20" [paginator]="true" sortMode="none">
+        <ng-template pTemplate="caption">
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" styleClass="ChipsListSm" [style]="{'width':'100%'}"></p-chips>
+                <p-selectButton [options]="Kolors" [(ngModel)]="Color" (ngModelChange)="Colorer()"></p-selectButton>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td>
+                    <button type="button" pButton (click)="Facts(rowData.ID)" icon="fa fa-search-plus " style="cursor:pointer;float:left; width:2rem;"></button>
+                    <button type="button" pButton (click)="Warn(rowData.ID)" icon="fa fa-times" style="cursor:pointer;float:left;width:2rem;"></button>
+                </td>
+                <td>
+                    <label class="Usr" style="color:#c40000;font-weight: bold !important;">{{rowData.ID}}</label>
+                </td>
+                <td>
+                    {{rowData.Seller.replace('_',' ')}}
+                </td>
+                <td>
+                    {{rowData.Title}}
+                </td>
+                <td>
+                    {{rowData.Client}}
+                </td>
+                <td>
+                    <label class="Usr">{{ rowData.DateG| date:'mediumDate'}}</label>
+                </td>
+                <td>
+                    Dias Transcurridos: {{Day(rowData.DateG, rowData.ID)}}
+                </td>
+                <td *ngIf="Roll==154 || Roll==000">
+                    <div class="ui-inputgroup" style="width:100%;">
+                        <button pButton type="button" label="Aceptar" (click)="Altered(rowData.ID,rowData.Fact)" [disabled]="!rowData.Alta==true"></button>
+                        <input type="text" pInputText placeholder="Factura" [(ngModel)]="rowData.Fact" style="width:100%;">
+                    </div>
+                </td>
+                <td *ngIf="Roll==145 || Roll==000">
+                    <div style="width:100%;">
+                        <p-inputSwitch [(ngModel)]="rowData.Alta" (ngModelChange)="Altered2(rowData.ID,rowData.Alta)" ></p-inputSwitch>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <br/>
+</p-fieldset>

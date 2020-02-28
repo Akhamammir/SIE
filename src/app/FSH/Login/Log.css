@@ -1,0 +1,304 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis");
+@font-face {
+  font-family: "Varela";
+  src: url("../../../assets/Font/Varela.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: #F2F3F4;
+}
+
+.background span {
+  width: 20vmin;
+  height: 20vmin;
+  border-radius: 20vmin;
+  backface-visibility: hidden;
+  position: absolute;
+  animation-name: move;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  z-index: 1;
+}
+.background span:nth-child(1) {
+  z-index: 2;
+  color: #FFD166;
+  top: 47%;
+  left: 85%;
+  animation-duration: 15.7s;
+  animation-delay: -0.5s;
+  transform-origin: 19vw -14vh;
+  box-shadow: 40vmin 0 6.0977635368vmin currentColor;
+}
+.background span:nth-child(2) {
+  z-index: 2;
+  color: #FFD166;
+  top: 8%;
+  left: 87%;
+  animation-duration: 11.2s;
+  animation-delay: -5s;
+  transform-origin: -13vw -8vh;
+  box-shadow: 40vmin 0 10.1642331855vmin currentColor;
+}
+.background span:nth-child(3) {
+  z-index: 2;
+  color: #F7314F;
+  top: 74%;
+  left: 33%;
+  animation-duration: 13.3s;
+  animation-delay: -5s;
+  transform-origin: -15vw 0vh;
+  box-shadow: -40vmin 0 5.2890208194vmin currentColor;
+}
+.background span:nth-child(4) {
+  z-index: 2;
+  color: #5DFDCB;
+  top: 23%;
+  left: 73%;
+  animation-duration: 13s;
+  animation-delay: -9.6s;
+  transform-origin: 16vw -10vh;
+  box-shadow: -40vmin 0 8.2643432797vmin currentColor;
+}
+.background span:nth-child(5) {
+  z-index: 2;
+  color: #5DFDCB;
+  top: 73%;
+  left: 92%;
+  animation-duration: 12.6s;
+  animation-delay: -14.2s;
+  transform-origin: 4vw 4vh;
+  box-shadow: 40vmin 0 5.7022906015vmin currentColor;
+}
+.background span:nth-child(6) {
+  z-index: 2;
+  color: #547CF2;
+  top: 80%;
+  left: 7%;
+  animation-duration: 12.4s;
+  animation-delay: -12.9s;
+  transform-origin: -18vw -14vh;
+  box-shadow: 40vmin 0 7.6690270309vmin currentColor;
+}
+.background span:nth-child(7) {
+  z-index: 2;
+  color: #F7314F;
+  top: 66%;
+  left: 95%;
+  animation-duration: 11s;
+  animation-delay: -11s;
+  transform-origin: 13vw -8vh;
+  box-shadow: -40vmin 0 13.3359530589vmin currentColor;
+}
+.background span:nth-child(8) {
+  z-index: 2;
+  color: #547CF2;
+  top: 46%;
+  left: 85%;
+  animation-duration: 11.3s;
+  animation-delay: -0.4s;
+  transform-origin: -19vw -3vh;
+  box-shadow: -40vmin 0 12.6880675603vmin currentColor;
+}
+.background span:nth-child(9) {
+  z-index: 2;
+  color: #5DFDCB;
+  top: 27%;
+  left: 8%;
+  animation-duration: 15.6s;
+  animation-delay: -9s;
+  transform-origin: -23vw 14vh;
+  box-shadow: -40vmin 0 11.2515376332vmin currentColor;
+}
+.background span:nth-child(10) {
+  z-index: 2;
+  color: #FFD166;
+  top: 45%;
+  left: 4%;
+  animation-duration: 12.5s;
+  animation-delay: -11.6s;
+  transform-origin: -24vw -15vh;
+  box-shadow: 40vmin 0 9.463471447vmin currentColor;
+}
+.background span:nth-child(11) {
+  z-index: 2;
+  color: #F7314F;
+  top: 35%;
+  left: 62%;
+  animation-duration: 11.6s;
+  animation-delay: -15s;
+  transform-origin: 24vw 18vh;
+  box-shadow: -40vmin 0 6.7355033904vmin currentColor;
+}
+.background span:nth-child(12) {
+  z-index: 2;
+  color: #FFD166;
+  top: 50%;
+  left: 14%;
+  animation-duration: 12.3s;
+  animation-delay: -15.2s;
+  transform-origin: 20vw 14vh;
+  box-shadow: -40vmin 0 8.2828725216vmin currentColor;
+}
+.background span:nth-child(13) {
+  z-index: 2;
+  color: #F7314F;
+  top: 26%;
+  left: 68%;
+  animation-duration: 14.1s;
+  animation-delay: -12.5s;
+  transform-origin: 25vw 1vh;
+  box-shadow: 40vmin 0 10.6497382363vmin currentColor;
+}
+.background span:nth-child(14) {
+  z-index: 2;
+  color: #5DFDCB;
+  top: 8%;
+  left: 24%;
+  animation-duration: 11s;
+  animation-delay: -9.1s;
+  transform-origin: 23vw 14vh;
+  box-shadow: -40vmin 0 14.8000960302vmin currentColor;
+}
+.background span:nth-child(15) {
+  z-index: 2;
+  color: #F7314F;
+  top: 59%;
+  left: 72%;
+  animation-duration: 14.7s;
+  animation-delay: -3s;
+  transform-origin: 25vw 1vh;
+  box-shadow: 40vmin 0 10.41107298vmin currentColor;
+}
+.background span:nth-child(16) {
+  z-index: 2;
+  color: #F7314F;
+  top: 72%;
+  left: 51%;
+  animation-duration: 11.9s;
+  animation-delay: -1.1s;
+  transform-origin: 9vw -16vh;
+  box-shadow: -40vmin 0 6.8504341393vmin currentColor;
+}
+.background span:nth-child(17) {
+  z-index: 2;
+  color: #FFD166;
+  top: 2%;
+  left: 35%;
+  animation-duration: 13.1s;
+  animation-delay: -11.6s;
+  transform-origin: -16vw 1vh;
+  box-shadow: -40vmin 0 6.7062036534vmin currentColor;
+}
+.background span:nth-child(18) {
+  z-index: 2;
+  color: #FFD166;
+  top: 8%;
+  left: 38%;
+  animation-duration: 12.7s;
+  animation-delay: -6.4s;
+  transform-origin: -20vw 18vh;
+  box-shadow: -40vmin 0 10.6468340309vmin currentColor;
+}
+.background span:nth-child(19) {
+  z-index: 2;
+  color: #FFD166;
+  top: 55%;
+  left: 39%;
+  animation-duration: 12.7s;
+  animation-delay: -15.3s;
+  transform-origin: -16vw 18vh;
+  box-shadow: -40vmin 0 13.427838193vmin currentColor;
+}
+.background span:nth-child(20) {
+  z-index: 2;
+  color: #547CF2;
+  top: 84%;
+  left: 87%;
+  animation-duration: 16s;
+  animation-delay: -4.7s;
+  transform-origin: -24vw -15vh;
+  box-shadow: 40vmin 0 11.0334166174vmin currentColor;
+}
+
+.Main {
+  z-index: 3;
+  position: absolute;
+  border-radius: 55px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 40rem;
+  height: 30rem;
+  background-color: rgba(122, 122, 122, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+#ELogo {
+  z-index: 4;
+  position: absolute;
+  top: 5%;
+  left: 43%;
+  width: 100px;
+  height: 100px;
+}
+
+.InputUsr {
+  z-index: 4;
+  font-family: "Varela", sans-serif;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  position: absolute;
+  padding: 7px;
+  font-size: 0.9rem;
+  top: 30%;
+  left: 5%;
+  right: 35%;
+  width: 90%;
+  box-shadow: 2px 4px 7px 0 rgba(0, 0, 0, 0.35);
+}
+
+.InputPwd {
+  z-index: 4;
+  font-family: "Varela", sans-serif;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  position: absolute;
+  padding: 7px;
+  font-size: 0.9rem;
+  top: 45%;
+  left: 5%;
+  right: 35%;
+  width: 90%;
+  box-shadow: 2px 4px 7px 0 rgba(0, 0, 0, 0.35);
+}
+
+#Login {
+  font-family: "Varela", sans-serif;
+  width: 90%;
+  background-color: #247BA0;
+  position: absolute;
+  left: 5%;
+  top: 60%;
+}
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=Log.css.map */

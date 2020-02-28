@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+@font-face {
+  font-family: "Varela";
+  src: url("../../../assets/Font/Varela.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: #F2F3F4;
+}
+
+$particleSize: 20vmin;
+$animationDuration: 6s;
+$amount: 20;
+.background span {
+  width: $particleSize;
+  height: $particleSize;
+  border-radius: $particleSize;
+  backface-visibility: hidden;
+  position: absolute;
+  animation-name: move;
+  animation-duration: $animationDuration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  z-index: 1;
+  $colors: (
+    #FFD166,
+    #F7314F,
+    #5DFDCB,
+    #547CF2
+  );
+  @for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+      z-index: 2;
+      color: nth($colors, random(length($colors)));
+      top: random(100) * 1%;
+      left: random(100) * 1%;
+      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+      $blurRadius: (random() + 0.5) * $particleSize * 0.5;
+      $x: if(random() > 0.5, -1, 1);
+      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    }
+  }
+}
+.Main {
+  z-index: 3;
+  position: absolute;
+  border-radius: 55px;
+  top: 0; left: 0; bottom: 0; right: 0;
+  margin:auto;
+  width: 40rem;
+  height: 30rem;
+  background-color: rgba(122, 122, 122, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+#ELogo {
+  z-index: 4;
+  position: absolute;
+  top: 5%;
+  left: 43%;
+  width: 100px;
+  height: 100px;
+}
+.InputUsr {
+  z-index: 4;
+  font-family: "Varela", sans-serif;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  position: absolute;
+  padding: 7px;
+  font-size: 0.9rem;
+  top: 30%;
+  left: 5%; right: 35%;
+  width: 90%;
+  box-shadow: 2px 4px 7px 0 rgba(0,0,0,0.35);
+}
+.InputPwd {
+  z-index: 4;
+  font-family: "Varela", sans-serif;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  position: absolute;
+  padding: 7px;
+  font-size: 0.9rem;
+  top: 45%;
+  left: 5%; right: 35%;
+  width: 90%;
+  box-shadow: 2px 4px 7px 0 rgba(0,0,0,0.35);
+}
+#Login {
+  font-family: "Varela", sans-serif;
+  width: 90%;
+  background-color: #247BA0;
+  position: absolute;
+  left: 5%;
+  top: 60%;
+}
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}

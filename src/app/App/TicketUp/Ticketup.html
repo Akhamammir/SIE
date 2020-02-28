@@ -1,0 +1,175 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca el nuevo nombre</label><br/>
+    <input type="text" size="30" pInputText [(ngModel)]="E">
+    <button type="button" pButton (click)="Pop=false;Editer()" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<p-overlayPanel #op>
+    <p-dataView [value]="Clients">
+            <p-header>
+                    <div class="ui-helper-clearfix">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-12">
+                                Clientes
+                            </div>
+                        </div>
+                    </div>
+                </p-header>
+        <ng-template let-cli pTemplate="listItem">
+            <div class="ui-g-8 ui-md-8 cli-details">
+                {{cli.Name}}
+                <button pButton type="button" icon="pi pi-search" (click)="CliN=cli.Name; op.hide()"></button>
+            </div>
+        </ng-template>
+    </p-dataView>
+</p-overlayPanel>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de categorias">
+    <label class="Usr">Tipo de ticket</label>
+    <p-selectButton [options]="types" [(ngModel)]="Type"></p-selectButton>
+    <div *ngIf="Type==1">
+        <p-dropdown [options]="Map" [(ngModel)]="Who" [style]="{'width':'300px'}" placeholder="Seleccion persona a realizar tarea" [group]="true">
+            <ng-template let-group pTemplate="group">
+                <span style="vertical-align:middle">{{group.label}}</span>
+            </ng-template>
+        </p-dropdown>
+        <p-dropdown [options]="Kind" [(ngModel)]="kind" [style]="{'width':'300px'}" placeholder="Seleccione tipo de actividad" [group]="true">
+            <ng-template let-group pTemplate="group">
+                <span style="vertical-align:middle">{{group.label}}</span>
+            </ng-template>
+        </p-dropdown>
+        <br/><br/>
+        <label class="Usr" style="margin-right: 6rem;">Fecha de Ticket</label> <label class="Usr">Dura mas de un dia?</label><p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="Several"></p-inputSwitch>
+        <label class="Usr">Dura todo el dia?</label><p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="Full"></p-inputSwitch>
+        <br/>
+        <p-calendar [(ngModel)]="Sdate" [showIcon]="true" dateFormat="dd-mm-yy" [showTime]="true" [style]="{'margin-right':'3rem'}" ></p-calendar> <p-calendar [(ngModel)]="Edate" [showIcon]="true" dateFormat="dd-mm-yy" [showTime]="true" *ngIf="Several"></p-calendar>
+        <br/><br/>
+        <label class="Usr">Ingrese descripcion del evento</label><br/>
+        <textarea [rows]="8" [cols]="80" pInputTextarea [(ngModel)]="Desc"></textarea>
+        <br/><br/>
+        <label class="Usr">Se repite?</label>
+        <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="Repeat"></p-inputSwitch><br/>
+        <span *ngIf="Repeat">
+            <label class="Usr">Elija cada cuando se repite</label><br/>
+            <div class="ui-g" style="width:250px;margin-bottom:10px">
+                <div class="ui-g-12"><p-radioButton name="group1" value="1" label="Diario" [(ngModel)]="Often" inputId="opt1"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group1" value="3" label="Cada 3er Dia" [(ngModel)]="Often" inputId="opt2"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group1" value="7" label="Cada Semana" [(ngModel)]="Often" inputId="opt3"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group1" value="30" label="Cada Mes" [(ngModel)]="Often" inputId="opt3"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group1" value="60" label="Cada 2 Meses" [(ngModel)]="Often" inputId="opt4"></p-radioButton></div>
+            </div>
+            <label class="Usr">Elija durante cuanto tiempo</label><br/>
+            <div class="ui-g" style="width:250px;margin-bottom:10px">
+                <div class="ui-g-12"><p-radioButton name="group2" value="7" label="Una semana" [(ngModel)]="Long" inputId="opt1"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group2" value="30" label="Un Mes" [(ngModel)]="Long" inputId="opt2"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group2" value="365" label="Un Año" [(ngModel)]="Long" inputId="opt3"></p-radioButton></div>
+                <div class="ui-g-12"><p-radioButton name="group2" value="3650" label="Hasta el fianl de los tiempos" [(ngModel)]="Long" inputId="opt4"></p-radioButton></div>
+            </div>
+        </span>
+        <button pButton type="button" icon="far fas fa-calendar-plus" label="Registrar Ticket" (click)="Ticket()" [disabled]="!Who || !kind || Desc.length==0 || Sdate.length==0 || (Several && Edate.length==0) || (Repeat && !Often && !Long)"></button>
+    </div>
+    <div *ngIf="Type==0">
+        <br/>
+        <div class="ui-g">
+            <div class="ui-g-2"></div>
+            <div class="ui-g-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" pInputText [(ngModel)]="CliN" (keyup)="KeyUp(op, $event, 'ClientServ', 0)" (keydown)="KeyDown()" placeholder="Nombre de cliente" style="width: 85%;">
+                        <button pButton type="button" label="Añadir Cliente" (click)="Up('ClientServ')" *ngIf="Add[0]"></button>
+                    </div>
+            </div>
+            <div class="ui-g-2"></div>
+            
+            <div class="ui-g-2"></div>
+            <div class="ui-g-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-mobile"></i></span>
+                        <input type="text" pInputText [(ngModel)]="ConN" placeholder="Nombre de contacto" style="width: 85%">
+                    </div>
+            </div>
+            <div class="ui-g-2"></div>
+            
+            <div class="ui-g-2"></div>
+            <div class="ui-g-4">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-desktop"></i></span>
+                        <input type="text" pInputText [(ngModel)]="EqT" (keyup)="KeyUp(op, $event, 'MarcasServ', 1)" (keydown)="KeyDown()" placeholder="Tipo de Equipo" style="width: 44%">
+                        <button pButton type="button" label="Añadir Equipo" (click)="Up('MarcasServ')" *ngIf="Add[1]"></button>
+                    </div>
+            </div>
+            <div class="ui-g-4">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-desktop"></i></span>
+                    <input type="text" pInputText [(ngModel)]="Brand" (keyup)="KeyUp(op, $event, 'MarcasServ', 2)" (keydown)="KeyDown()" placeholder="Marca" style="width: 15%">
+                    <button pButton type="button" label="Añadir Marca" (click)="Up('MarcasServ')" *ngIf="Add[2]"></button>
+                </div>
+            </div>
+            <div class="ui-g-2"></div>
+
+            <div class="ui-g-2"></div>
+            <div class="ui-g-8">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-desktop"></i></span>
+                    <input type="text" pInputText [(ngModel)]="EqD" placeholder="Descripcion de equipo" style="width: 85%">
+                </div>
+            </div>
+            <div class="ui-g-2"></div>
+
+            <div class="ui-g-2"></div>
+            <div class="ui-g-4">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-desktop"></i></span>
+                    <input type="text" pInputText [(ngModel)]="SN" placeholder="No. de Serie" style="width: 80%">
+                </div>
+            </div>
+            <div class="ui-g-4">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-desktop"></i></span>
+                    <input type="text" pInputText [(ngModel)]="PN" placeholder="No. de Producto" style="width: 80%">
+                </div>
+            </div>
+            <div class="ui-g-2"></div>
+
+            <div class="ui-g-2"></div>
+            <div class="ui-g-4">
+                Observaciones:<br/>
+                <textarea pInputTextarea [rows]="5" [cols]="60" [(ngModel)]="Obs"></textarea>
+            </div>
+            <div class="ui-g-4">
+                Descripcion:<br/>
+                <textarea pInputTextarea [rows]="5" [cols]="60" [(ngModel)]="Descr"></textarea>
+            </div>
+            <div class="ui-g-2"></div>
+
+            <div class="ui-g-12">
+                <div class="ui-g" style="margin-bottom:10px">
+                    <div class="ui-g-2"></div>
+                    <div class="ui-g-1"><p-radioButton name="group2" value="Garantia" label="Garantia" [(ngModel)]="SType" inputId="preopt1"></p-radioButton></div>
+                    <div class="ui-g-1"><p-radioButton name="group2" value="Reparacion" label="Reparacion" [(ngModel)]="SType" inputId="preopt2"></p-radioButton></div>
+                    <div class="ui-g-1"><p-radioButton name="group2" value="Instalacion" label="Instalacion" [(ngModel)]="SType" inputId="preopt3"></p-radioButton></div>
+                    <div class="ui-g-1"><p-radioButton name="group2" value="Asesoria" label="Asesoria" [(ngModel)]="SType" inputId="preopt3"></p-radioButton></div>
+                    <div class="ui-g-1"><p-radioButton name="group2" value="Mantto." label="Mantto." [(ngModel)]="SType" inputId="preopt3"></p-radioButton></div>
+                    <div class="ui-g-3">
+                        <p-radioButton name="group2" [value]="STypeOther" label="Otro" [(ngModel)]="SType" inputId="preopt3"></p-radioButton>
+                        <input type="text" pInputText [(ngModel)]="STypeOther" placeholder="Que servicio (Primero escribir y despues seleccionar la casilla)" style="width: 80%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g-2"></div>
+            <div class="ui-g-8">
+                <p-chips [(ngModel)]="Accy" placeholder="Ingrese accesorios"></p-chips>
+            </div>
+            <div class="ui-g-2"></div>
+
+            <div class="ui-g-2"></div>
+            <div class="ui-g-8">
+                <button pButton type="button" label="Registrar Servicio" (click)=Test() style="width: 100%"></button>
+            </div>
+            <div class="ui-g-2"></div>
+        </div>
+    </div>
+    
+</p-fieldset>

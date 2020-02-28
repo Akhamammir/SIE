@@ -1,0 +1,495 @@
+@font-face {
+  font-family: "Varela";
+  src: url("../../../assets/Font/Varela.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+p {
+  font-family: "Varela", sans-serif;
+}
+
+.ui-lightbox {
+  position: absolute !important;
+  transition-duration: 0ms !important;
+}
+
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+.Background {
+  width: 100vw;
+  height: 100vh;
+  background-color: #F2F3F4;
+  overflow: scroll;
+}
+
+.menu {
+  position: absolute;
+  top: 0%;
+  height: 39px;
+  width: 100vw;
+  background-color: cornflowerblue;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.FileSlctr {
+  width: 70% !important;
+}
+
+.Card {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 9vh;
+  left: 7vw;
+  width: 22vw;
+  height: 14vh;
+}
+.Card p-header {
+  cursor: pointer;
+}
+
+.Card2 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 9vh;
+  left: 39vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card3 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 9vh;
+  right: 7vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card4 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 25vh;
+  left: 7vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card5 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 25vh;
+  left: 39vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card6 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 25vh;
+  right: 7vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card7 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 41vh;
+  left: 7vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card8 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 41vh;
+  left: 39vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.Card9 {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  top: 41vh;
+  right: 7vw;
+  width: 22vw;
+  height: 14vh;
+  cursor: pointer;
+}
+
+.holder {
+  left: 2vw;
+  position: absolute;
+  bottom: 2vh;
+  width: 47vw;
+  height: 50vh;
+}
+
+#C2 {
+  left: auto;
+  right: 2vw;
+}
+
+.SwG {
+  padding-top: 8vh;
+}
+
+.Sectorer {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  height: 100% !important;
+}
+.Sectorer div {
+  height: 100%;
+}
+.Sectorer div div {
+  height: 100%;
+  font-family: "Varela", sans-serif;
+}
+.Sectorer div div span {
+  margin-top: 6%;
+}
+
+.Trailer {
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  left: 25vw;
+  background-color: cornflowerblue !important;
+  border: none !important;
+}
+
+.ui-menuitem-text {
+  font-family: "Varela", sans-serif;
+  font-weight: 500;
+  color: #F2F3F4;
+}
+
+.Name {
+  webkit-user-drag: element;
+  font-family: "Varela", sans-serif;
+  position: absolute;
+  width: 40vw;
+  top: 26%;
+  right: 5vw;
+  color: #F2F3F4;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: end;
+}
+
+.CornerTag {
+  position: absolute;
+  top: 0.7%;
+  right: 2%;
+  font-size: 1.8rem;
+  color: #3CC480;
+}
+
+.CornerTagBot {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  font-weight: bold;
+  color: #3CC480;
+}
+
+.StartTag {
+  position: absolute;
+  bottom: 19%;
+  left: 1%;
+  color: #F2F3F4;
+}
+
+.EndTag {
+  position: absolute;
+  bottom: 19%;
+  right: 1%;
+  color: #222324;
+}
+
+.Map {
+  position: relative;
+  top: 40vh;
+  left: 5vw;
+  height: 1210px;
+  width: 1685px;
+  background: url(http://35.227.119.63:4200/ImgSrc/Map.png);
+  background-size: contain;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.Ovrly {
+  width: 200px;
+  height: 230px;
+  background-color: #F2F3F4;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  z-index: 100;
+  display: none;
+}
+
+.Tabs {
+  margin-top: 95vh;
+}
+
+.ui-tabview-nav {
+  width: 100% !important;
+  padding: 0px;
+  list-style: none;
+  background: #FAFBFC;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  border-radius: 40px !important;
+  position: relative;
+}
+.ui-tabview-nav li {
+  font-family: "Varela", sans-serif;
+  width: 48vw !important;
+  border: none !important;
+}
+.ui-tabview-nav li:hover {
+  border-radius: 40px;
+}
+.ui-tabview-nav .ui-tabview-selected {
+  font-family: "Varela", sans-serif;
+  z-index: 1;
+  border-radius: 50px;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: #05abe0;
+  background: -moz-linear-gradient(45deg, #05abe0 0%, #5077ED 100%);
+  background: -webkit-linear-gradient(45deg, #05abe0 0%, #5077ED 100%);
+  background: linear-gradient(45deg, #05abe0 0%, #5077ED 100%);
+}
+
+.ui-tabview-panels {
+  background: none !important;
+  border: none !important;
+  height: 0px !important;
+  padding: 0px !important;
+}
+
+.ui-tabview-panel {
+  position: absolute;
+  top: 5vh;
+  width: 100vw;
+  height: 90vh;
+}
+
+.ui-progressbar-label.ng-star-inserted {
+  display: none !important;
+}
+
+.ui-lightbox-content.ui-corner-all img {
+  height: 800px !important;
+}
+
+Diag {
+  width: 195px;
+  height: 210px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.ui-dialog {
+  box-shadow: none !important;
+}
+
+.ui-dialog-content {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 850px) {
+  .holder {
+    margin-top: 20vh;
+    position: relative;
+    width: 44vw;
+    height: 50vh;
+  }
+
+  #C2 {
+    margin-top: 2vh;
+    left: auto;
+    right: -1.5vw;
+  }
+
+  .ui-progressbar {
+    display: none;
+  }
+
+  .Card {
+    top: 9vh;
+    left: 7vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card2 {
+    top: 9vh;
+    left: 53vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card3 {
+    top: 32vh;
+    left: 53vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card4 {
+    top: 32vh;
+    left: 7vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card5 {
+    top: 55vh;
+    left: 7vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card6 {
+    top: 55vh;
+    left: 53vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card7 {
+    top: 78vh;
+    left: 7vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Card8 {
+    top: 78vh;
+    left: 53vw;
+    width: 42vw;
+    height: 20vh;
+  }
+
+  .Map {
+    top: 80vh;
+  }
+}
+@media (max-width: 414px) {
+  .holder {
+    width: 96.5vw;
+  }
+
+  .ui-progressbar {
+    display: none;
+  }
+
+  .Card {
+    position: relative;
+    left: 7vw;
+    width: 88vw;
+  }
+
+  .Card2 {
+    position: relative;
+    top: 10vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Card3 {
+    position: relative;
+    top: 11vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Card4 {
+    position: relative;
+    top: 12vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Card5 {
+    position: relative;
+    top: 13vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Card6 {
+    position: relative;
+    top: 14vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Card7 {
+    position: relative;
+    top: 15vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Card8 {
+    position: relative;
+    top: 16vh;
+    width: 88vw;
+    left: 7vw;
+  }
+
+  .Map {
+    top: 15vh;
+  }
+}
+@keyframes ui-progress-spinner-color {
+  100%, 0% {
+    stroke: #064789;
+  }
+  40% {
+    stroke: #2F97C1;
+  }
+  66% {
+    stroke: #1CCAD8;
+  }
+  80%, 90% {
+    stroke: #15E6CD;
+  }
+}
+
+/*# sourceMappingURL=Dashboard.css.map */

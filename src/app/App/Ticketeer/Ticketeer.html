@@ -1,0 +1,59 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog [(visible)]="display" [responsive]="true" [width]="500" [minWidth]="200" [minY]="70" styleClass="CalDialog" [contentStyle]="{'padding-left':'0', 'padding-right':'0', 'background-color': 'cornflowerblue','border':'0'}" >
+        <p-card [style]="{'box-shadow':'0 4px 8px 0 rgba(0,0,0,0.2)', 'transition':'0.3s', 'border':'0','margin':'0.75rem'}">
+            <p-header>
+                <p style="margin:0; font-weight: normal; font-size: 1.1rem;">Responsable: <span style="color: cornflowerblue">{{What.split(':')[0]}}</span>,</p>
+                <p style="margin:0; font-weight: normal;">Solicitado por: <span style="color: cornflowerblue">{{Who}}</span></p>
+            </p-header>
+                <div class="ui-g">
+                    <div class="ui-g-4"></div>
+                    <div class="ui-g-4" style="text-align: center">{{When.Weekday.charAt(0).toUpperCase() + When.Weekday.substring(1)}}</div>
+                    <div class="ui-g-4"></div>
+
+                    <div class="ui-g-4"></div>
+                    <div class="ui-g-4" style="text-align: center">
+                        <h5 style="width: 100%;font-weight:lighter; font-family: 'Rales';vertical-align: middle;text-align:center; font-size: 4rem; margin:0;">{{When.Day}}
+                        </h5>
+                    </div>
+                    <div class="ui-g-4"></div>
+
+                    <div class="ui-g-4"></div>
+                    <div class="ui-g-4" style="text-align: center">{{When.Month.charAt(0).toUpperCase() + When.Month.substring(1) + ', ' + When.Year}}</div>
+                    <div class="ui-g-4"></div>
+                </div>
+                <p style="margin:0; font-weight: normal;">Hora de Inicio: <span style="color: cornflowerblue">{{When.Hour}}</span></p>
+                <p style="margin:0; font-weight: normal;">Descripcion de Tarea: <span style="color: cornflowerblue">{{Detail}}</span></p>
+        </p-card>
+        <p-card [style]="{'box-shadow':'0 4px 8px 0 rgba(0,0,0,0.2)', 'transition':'0.3s', 'border':'0', 'margin':'0.75rem' }">
+            <p style="margin:0; font-weight: normal;">Hora de Tarea: <span style="color: cornflowerblue">{{When.Hour}}</span></p>
+            <p style="margin:0; font-weight: normal;">Hora de Inicio: <span style="color: cornflowerblue">{{When.Hour}}</span></p>
+            <span pInplaceDisplay>
+                <label class="Usr" style="color:#c40000;font-weight: bold !important;">Notas: </label>
+                <span [ngClass]="A.Type" *ngFor='let A of Notes; let j=index'>{{A.Note}}</span>
+            </span><br/>
+            <p-inplace closable="closable" *ngIf="!status">
+                <span pInplaceDisplay>
+                    <label class="Usr" style="color:#c40000;font-weight: bold !important;">Click para agregar notas</label>
+                </span>
+                <span pInplaceContent>
+                    <div class="ui-inputgroup">
+                        <button pButton type="button" (click)="TNote='Success'" icon="pi pi-check" class="ui-button-success" style="background-color: #4ed964; width: 1.8em; border:0;"></button> 
+                        <button pButton type="button" (click)="TNote='Info'" icon="pi pi-info-circle" class="ui-button-info" style="background-color: #5eb1bf; width: 1.8em; border:0;"></button>
+                        <button pButton type="button" (click)="TNote='Error'" icon="pi pi-times" class="ui-button-danger" style="background-color: #d74a45; width: 1.8em; border:0;"></button>
+                        <input type="text" pInputText [(ngModel)]="CNote" placeholder="Price">
+                        <span class="ui-inputgroup-addon"><i class="{{TNote == 'Success' ? 'pi pi-check': (TNote == 'Info' ? 'pi pi-info-circle' : 'pi pi-times') }}"></i></span>
+                        <button pButton type="button" (click)="ProcessNote()" label="Agregar" class="ui-button-info"></button>
+                    </div>
+                </span>
+            </p-inplace>
+        </p-card>
+    <p-footer>
+        <button pButton type="button" label="Inciar Tarea" (click)="Complete()" *ngIf="!status"></button>
+        <h3 style="font-weight:lighter; font-family: 'Rales';vertical-align: middle;" *ngIf="status">{{DateC}}</h3>
+    </p-footer>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de categorias">
+    <p-schedule [events]="events" (onEventClick)="handleEventClick($event)" [header]="header" [eventLimit]="4" [editable]="false"></p-schedule>
+</p-fieldset>

@@ -1,0 +1,17 @@
+<img src="assets/img/BkLog.jpg" id="BkG"/>
+<div id="Log">
+  <div id="Cont">
+    <p-growl [value]="I"></p-growl>
+    <img src="assets/img/EL.jpg" id="ELogo"/>
+    <br/><br/>
+    <label class="Usr">Usuario:</label><br/><input type="text" placeholder="Usuario" class="Logg" [(ngModel)]="Usr"/>
+    <br/><br/><br/>
+    <label class="Usr">Contraseña:</label><br/><input type="password" placeholder="Contraseña" class="Logg" [(ngModel)]="Pwd" (keyup.enter)="Getter()"/>
+    <br/><br/><br/>
+    <button pButton type="button" (click)="Getter()" label="Login" id="Acc"></button>
+    <button pButton type="button" (click)="Recover()" label="Olvido contraseña?" id="FPwd"></button>
+    <h1>
+      {{title}}
+    </h1>
+  </div>
+</div>

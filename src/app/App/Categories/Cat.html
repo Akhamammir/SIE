@@ -1,0 +1,34 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca el nuevo nombre</label><br/>
+    <input type="text" size="30" pInputText [(ngModel)]="E">
+    <button type="button" pButton (click)="Pop=false;Editer()" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de categorias">
+    <p-dataList [value]="Cats">
+        <p-header>
+            <label class="Usr">Filtro</label>
+            <button type="button" pButton (click)="Adder()" [disabled]="exists" label="Agregar" style="cursor:pointer;float:left;"></button>
+            <input type="text" size="30" pInputText [(ngModel)]="F" (ngModelChange)="Filter($event)">
+        </p-header>
+        <ng-template let-cat pTemplate="item">
+            <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5;">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3" style="text-align:center">
+                        <div class="ui-grid-col-2">
+                            <button type="button" pButton (click)="Shower(cat.id, cat.Name)" icon="fa fa-pencil" style="cursor:pointer;float:left;"></button>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <button type="button" pButton (click)="Substracter(cat.id)" icon="fa fa-trash" style="cursor:pointer;float:left;"></button>
+                        </div>                            
+                        <div class="ui-grid-col-2">
+                            <label class="Usr">{{cat.Name}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataList>
+</p-fieldset>

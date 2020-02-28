@@ -1,0 +1,66 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca el nuevo nombre</label><br/>
+    <input type="text" size="30" pInputText [(ngModel)]="E">
+    <button type="button" pButton (click)="Pop=false" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<p-contextMenu #cm [model]="items"></p-contextMenu>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de Cotizaciones">
+    <p-table [columns]="Cols" [value]="Cots"  [(selection)]="Send" [rows]="20" [paginator]="true" sortMode="none"  [(contextMenuSelection)]="selectedCot" [contextMenu]="cm">
+        <ng-template pTemplate="caption">
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                <button type="button" pButton (click)="R.navigate(['New',USR,Roll])" icon="fa fa-plus" style="cursor:pointer;float:left;width:2rem;"></button>
+                <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" styleClass="ChipsList" [style]="{'width':'100%'}"></p-chips>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 10rem">
+                    Acciones
+                </th>
+                <th>
+                    Num. Cotizacion
+                </th>
+                <th>
+                    Titulo
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Ejecutivo
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pContextMenuRow]="rowData">
+                <td>
+                    <button type="button" pButton (click)="R.navigate(['Edit','!?'+rowData.ID+'-'+USR,Roll])" icon="fa fa-pencil" style="cursor:pointer;float:left;width:2rem;"></button>
+                    <button type="button" pButton (click)="Warn(rowData.ID)" icon="fa fa-times" style="cursor:pointer;float:left;width:2rem;"></button>
+                </td>
+                <td>
+                    <label class="Usr" style="color:#c40000;font-weight: bold !important;">{{rowData.ID ? rowData.ID : 'Loading...'}}</label>
+                </td>
+                <td>
+                    {{rowData.Title}}
+                </td>
+                <td>
+                    {{rowData.Client}}
+                </td>
+                <td>
+                    <label class="Usr">{{ rowData.DateG| date:'mediumDate'}}</label>
+                </td>
+                <td>
+                    {{rowData.Seller.replace('_',' ')}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <button type="button" pButton (click)="R.navigate(['New',USR])" icon="fa fa-plus" style="cursor:pointer;float:left;"></button>
+</p-fieldset>

@@ -1,0 +1,87 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de empleados">
+    <p-table [value]="Emp" sortMode="none">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Acciones</th>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Puesto</th>
+                <th>Celular</th>
+                <th>Cumpleaños</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-emp>
+            <tr>
+                <td>
+                    <div class="ui-inputgroup" style="margin:.1cm;">
+                            <button type="button" pButton (click)="ElimEmp(emp)" icon="fa fa-trash"></button>
+                            <button type="button" pButton (click)="EditEmp(emp)" icon="fa fa-pencil"></button>
+                    </div>
+                </td>
+                <td>
+                    {{emp.Name.replace('_', ' ')}}
+                </td>
+                <td>
+                    {{emp.Depto}}
+                </td>
+                <td>
+                    {{emp.Pos}}
+                </td>
+                <td>
+                    {{emp.Cel}}
+                </td>
+                <td>
+                    {{emp.Birth|date:'longDate'}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-fieldset>
+<br/><br/>
+<p-fieldset legend="Registro de empleado" styleClass="Legendary">
+    <div id="Imagine">
+        <img [src]="Imger" (error)="notFound()"/><br/><br/>
+        <label class="Usr">Usuario:{{(this.Nm.slice(0,1)+this.Ap).toLowerCase()}}</label>
+    </div>
+    <div id='ImagineAgain'>
+        <label class="Usr">Nombre(S) :</label><input type="text" class="User" pInputText [(ngModel)]="Nm" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Apellido Paterno:</label><input type="text" class="User" pInputText [(ngModel)]="Ap" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Apellido Materno:</label><input type="text" class="User" pInputText [(ngModel)]="Am" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Puesto:</label><input type="text" class="User" pInputText [(ngModel)]="P" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Departamento:</label><input type="text" class="User" pInputText [(ngModel)]="Dp"/>
+        <br/><br/>
+        <label class="Usr" style="margin-right:3.3rem; margin-bottom:-2px;">Direccion:</label><input type="text" class="facer" pInputText [(ngModel)]="Dir" style="width:32.1%; margin-bottom:5px;"/><label class="Usr" style="margin-left:9px; margin-bottom:-2px;">Colonia:</label><input type="text" class="facer" pInputText [(ngModel)]="Col" id="Col"/>
+        <br/><br/>
+        <label class="Usr">Estado:</label><p-dropdown [options]="States" [(ngModel)]="Estado" [style]="{'width':'150px'}" filter="filter" (ngModelChange)="Upper($event)"></p-dropdown>
+        <label class="Usr">CP:</label><p-inputMask [(ngModel)]="CP" mask="99999" (ngModelChange)="Upper($event)"></p-inputMask>
+        <br/><br/>
+        <label class="Usr" style="margin-top:7.4px;">Contraseña:</label><input type="password" class="User" pInputText [(ngModel)]="Pass" (ngModelChange)="Upper($event)" style="margin-top:0.2px;"/>
+    </div>
+    <br/><br/>
+    <label class="Usr">Celular:</label><p-inputMask [(ngModel)]="Cel" mask="999-999-9999"></p-inputMask>
+    <label class="Usr">Tel. de Accidente:</label><p-inputMask [(ngModel)]="TelA" mask="999-999-9999" (ngModelChange)="Upper($event)"></p-inputMask>
+    <label class="Usr">NSS:</label><p-inputMask [(ngModel)]="NSS" mask="99-99-99-9999-9"></p-inputMask><br/><br/>
+    <label class="Usr">RFC:</label><p-inputMask [(ngModel)]="RFC" mask="aa-a-a-99-99-99-***"></p-inputMask>
+    <label class="Usr">Tipo de Sangre:</label><p-selectButton [options]="Bloods" [(ngModel)]="BloodType"></p-selectButton>
+    <br/><br/>
+    <label class="Usr">Fecha de ingreso:</label><p-calendar [(ngModel)]="FIn" dateFormat="dd.mm.yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2017"></p-calendar>
+    <br/><br/>
+    <label class="Usr">Cumpleaños:</label><p-calendar [(ngModel)]="Br" dateFormat="dd.mm.yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2005"></p-calendar>
+    <p-toggleButton onLabel="Comisiona" offLabel="No Comisiona" 
+        onIcon="fa-check-square" offIcon="fa-square" [(ngModel)]="Cm"></p-toggleButton>
+    <br/><br/>
+    <label class="Usr">Libro de direcciones:</label>
+    <p-chips [(ngModel)]="ABook" allowDuplicate="false" placeholder="Introduzca direcciones de correo frecuentes"></p-chips>
+    <br/><br/>
+    <label class="Usr">Foto:</label>
+    <br/><br/>
+    <p-fileUpload [name]="Img" url="http://35.196.68.244:4200/Upp" (onSelect)="onSelect($event)" [disabled]= "dis" (onUpload)="onUpload($event)" (onError)="onError($event)" accept="image/*" uploadLabel="Subir" chooseLabel="Seleccionar Imagen" cancelLabel="Cancelar" styleClass="Imagine"></p-fileUpload>
+    <button pButton type="button" label="Aceptar" (click)="Registerer()" [disabled]="ena"></button>
+</p-fieldset>

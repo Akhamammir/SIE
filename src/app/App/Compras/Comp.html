@@ -1,0 +1,189 @@
+<p-growl [value]="G" life="1500"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <p-steps [model]="Items" [(activeIndex)]="activeIndex" [style]="{'margin-left': '45%'}"></p-steps>
+    <div *ngIf="activeIndex==0">
+        <label class="Usr">Empresa:</label><p-dropdown id="CDrop" [options]="Cl" [(ngModel)]="Clnt" [style]="{'width':'25rem','right':'0.4rem'}" (onChange)="Sel()"></p-dropdown>
+        <label class="Usr">Ingrese datos del Responsable de envio:</label>
+        <input class="facer" [(ngModel)]="Provided[5]" placeholder="Nombre de Responable" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Provided[6]" placeholder="Telefono de contacto" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Provided[7]" placeholder="Email del responsable" style="margin:.1cm; width:95%;" required="true"/>
+    </div>
+    <div *ngIf="activeIndex!=0">
+        <label class="Usr">Direccion de entrega:</label><p-dropdown id="CDrop" [options]="Pl" [(ngModel)]="PL" [style]="{'width':'25rem','right':'0.4rem'}" (onChange)="Set2()"></p-dropdown>
+        <label class="Usr">Ingrese datos de Entrega:</label>
+        <input class="facer" [(ngModel)]="Delivered[0]" placeholder="Lugar de Entrega" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[1]" placeholder="Nombre de Responable" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[2]" placeholder="Direccion de Entrega" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[3]" placeholder="Colonia" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[4]" placeholder="Estado" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[5]" placeholder="Ciudad" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[6]" placeholder="Telefono de contacto" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[7]" placeholder="Email del responsable" style="margin:.1cm; width:95%;" required="true"/>
+    </div>
+    <button type="button" pButton (click)="activeIndex=1" icon="fa fa-send" label="Entrega a cliente." style="cursor:pointer;float:left;" *ngIf="activeIndex==0"></button>
+    <button type="button" pButton (click)="Build(0)" icon="fa fa-send" label="Entrega en Ecosta" style="cursor:pointer;float:left;" *ngIf="activeIndex==0"></button>
+    <button type="button" pButton (click)="Build(1)" icon="fa fa-send" label="Entrega en Ecosa" style="cursor:pointer;float:left;" *ngIf="activeIndex==0"></button>
+    <button type="button" pButton (click)="Build()" icon="fa fa-send" label="OK" style="cursor:pointer;float:left;" *ngIf="activeIndex!=0"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Lista de Compras">
+    <p-overlayPanel #op (mouseleave)="op.hide()" (blur)="op.hide()" [dismissable]="true">
+        <p-dataList [value]="P2" [rows]="5">
+            <ng-template let-Pro pTemplate="item">
+                <button pButton type="button" (click)="One(Majora, op, Pro.Alias)" label="Elegir" class="ui-button-info"></button>
+                <label class="Usr">{{Pro.Alias}}</label>
+            </ng-template>
+        </p-dataList>
+    </p-overlayPanel>
+    <p-dataTable [value]="Gen" scrollable="true" [editable]="true" resizableColumns="true" columnResizeMode="expand" [rowStyleClass]="RowS" [(selection)]="Send" rowGroupMode="subheader" groupField="MID" scrollHeight="800px" [paginator]="true" [rows]="30">
+        <p-header>
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                    <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" styleClass="ChipsList" [style]="{'width':'100%'}"></p-chips>
+            </div>
+        </p-header>
+        <ng-template pTemplate="rowgroupheader" let-rowData let-i=rowIndex>
+            Orden de Facturacion: {{rowData['MID']}}
+        </ng-template>
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column [style]="{'width':'7.6rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                <div class="ui-inputgroup" style="margin:.1cm;">
+                    <button type="button" pButton (click)="Modifyer(i,1)" icon="fa fa-clone" style="cursor:pointer;float:left;"></button>
+                </div>
+            </ng-template>
+        </p-column>
+        <p-column field="MID" header="O. de F." [style]="{'width':'8rem'}" [sortable]="true"></p-column>
+        <p-column field="Cli" header="Cliente" [style]="{'width':'8rem'}" [sortable]="true"></p-column>
+        <p-column field="Cant" header="Cant." [editable]="true" [style]="{'width':'3.5rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="Unit" header="NO. Parte" [style]="{'width':'8rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="Desc" header="Descripcion" [style]="{'width':'11rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="Prov" header="Provedor Sug." [style]="{'width':'7rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="CFact" header="C. Vendedor." [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{ ((Nani(De[col.field]) ? De[col.field] : 0) | currency:'USD':true:'1.0-2')}}
+            </ng-template>
+        </p-column>
+        <p-column field="Koin" header="Moneda Vendedor" [style]="{'width':'6rem'}" [sortable]="true">
+        </p-column>
+        <p-column field="CInicial" header="Precio Cliente" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{((Nani(De[col.field]) ? (De['Ctot']/De['Cant']) : 0) | currency:'USD':true:'1.0-2')}}
+            </ng-template>
+        </p-column>
+        <p-column field="MonC" header="Moneda Venta" [style]="{'width':'6rem'}">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{ (De[col.field] ? 'Dolares' : 'Pesos')}}
+            </ng-template>
+        </p-column>
+        <p-column field="Comm" header="Comm. V." [style]="{'width':'10rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{ De[col.field] }}
+            </ng-template>
+        </p-column>
+        <p-column field="CCompra" header="C. Compra" [editable]="true" [style]="{'width':'10rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Priced($event, i)" placeholder="Costo real de compra" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="PReal" header="Prov. Real" [editable]="true" [style]="{'width':'10rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Arr(PP,De[col.field], Field)" (focus)="OPer($event, i, op)" placeholder="Proovedor de compra" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="Koin" header="Moneda C." [style]="{'width':'7rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                <p-toggleButton onLabel="Dolares" offLabel="Pesos " [(ngModel)]="De[col.field]" (ngModelChange)="Priced($event, i)" [style]="{'width':'90px'}" ></p-toggleButton>
+            </ng-template>
+        </p-column>
+        <p-column field="TdC" header="T. de C." [editable]="true" [style]="{'width':'10rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Priced($event, i)" placeholder="Tasa de Cambio" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="GdE" header="Gastos de Envio" [editable]="true" [style]="{'width':'10rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Priced($event, i)" placeholder="Costo real de envio" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="TdE" header="T. Entrega" [editable]="true" [style]="{'width':'10rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" placeholder="Proovedor de compra" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="Commit" header="Com." [editable]="true" [style]="{'width':'5rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Priced($event, i)" [style]="{'width':'100%'}" required="true" autofocus="true"/>
+                </ng-template>
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body">
+                    {{ Nani(De[col.field]) ? ((De[col.field]/100) | percent:'1.2-2') : 0}}
+                </ng-template>
+            </p-column>
+        <p-column field="CFin" header="Importe" [style]="{'width':'7rem'}">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{Nani(De[col.field]) ? (De[col.field]/De['Cant'] | currency:'USD':true:'1.2-2') : 0}}
+            </ng-template>
+        </p-column>
+        <p-column field="CFin" header="Subtotal" [style]="{'width':'7rem'}">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{Nani(De[col.field]) ? (De[col.field] | currency:'USD':true:'1.2-2') : 0}}
+            </ng-template>
+        </p-column>
+        <p-column field="Pedido" header="No. Pedido" [editable]="true" [style]="{'width':'10rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" placeholder="Num de pedido(opcional)" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="Com" header="Comm. C." [style]="{'width':'10rem'}" editable="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" placeholder="Comentarios de compra" style="margin:.1cm; width:95%;" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="Date" header="Fecha" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{ De[col.field]| date:'mediumDate'}}
+            </ng-template>
+        </p-column>
+        <p-column field="Date" header="Tiempo Transc." [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                Hace {{DateR(De[col.field], Gen[i].ID)}} dias
+            </ng-template>
+        </p-column>
+        <!--<p-column header="Acciones" [style]="{'width':'18.6rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                <div class="ui-inputgroup" style="margin:.1cm;">
+                    <p-fileUpload mode="basic" name="{{'pdf-'+Gen[i].ID+'-OC-'+Gen[i].OC}}" chooseLabel="Orden." class="Compras" url="http://192.168.1.30:4200/Upp" auto="true" (onUpload)="onBasicUpload($event, i,'OC')"></p-fileUpload>
+                    <p-fileUpload mode="basic" name="{{'pdf-'+Gen[i].ID+'-ENV-'+Gen[i].Env}}" chooseLabel="Guia" class="Compras" url="http://192.168.1.30:4200/Upp" auto="true" (onUpload)="onBasicUpload($event, i,'Env')"></p-fileUpload>
+                    <p-fileUpload mode="basic" name="{{'pdf-'+Gen[i].ID+'-PAGO-'+Gen[i].Pag}}" chooseLabel="Pago" class="Compras" url="http://192.168.1.30:4200/Upp" auto="true" (onUpload)="onBasicUpload($event, i,'Pag')"></p-fileUpload>
+                </div>
+            </ng-template>
+        </p-column>
+        <p-column header="Ver Archivos" [style]="{'width':'14.7rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                <p-carousel [value]="items[i].Nm" numVisible="1" circular="true">
+                    <ng-template let-item pTemplate="item">
+                        <button type="button" pButton icon="fa fa-search" label="{{item.A}}" (click)="Modded($event,item.A)" style="cursor:pointer;float:left;"></button>
+                    </ng-template>
+                </p-carousel>
+            </ng-template>
+        </p-column>-->
+    </p-dataTable>
+    <button type="button" pButton (click)="Provides(Send[0].PReal)" icon="fa fa-send" label="Generar Pedido" style="cursor:pointer;float:left;"></button>
+</p-fieldset>

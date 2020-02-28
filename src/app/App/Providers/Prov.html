@@ -1,0 +1,134 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de proveedores">
+    <p-overlayPanel #op (mouseleave)="op.hide()" (focusout)="op.hide()">
+        <p-dataList [value]="P2" [rows]="10" [paginator]="true">
+            <ng-template let-Pro pTemplate="item">
+                <div *ngIf="Uno; else Dos">
+                    <label class="Usr" style="color:#1481ff; font-weight: bold !important;">Contacto: {{Pro.Nom}}</label>
+                    <div class="ui-g">
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Telefonos: </label><br/><label class="Usr">{{Processor(Pro.Tel,'Tel')}}</label></div>
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Correos: </label><br/><label class="Usr">{{Processor(Pro.Mail,'Mail')}}</label></div>
+                    </div>
+                    <hr class="LSep">
+                </div>
+                <ng-template #Dos>
+                    <label class="Usr" style="color:#1481ff; font-weight: bold !important;">Banco: {{Pro.Bank}}</label>
+                    <div class="ui-g">
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Sucursal: {{Pro.Suc}}</label></div>
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Direccion: {{Pro.Dir}}</label></div>
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Cuenta: {{Pro.Acc}}</label></div>
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">CLABE: {{Pro.Clab}}</label></div>
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Referencia: {{Pro.Ref}}</label></div>
+                        <div class="ui-g-4 ui-sm-4 ui-md-4 ui-lg-4"><label class="Usr">Moneda: {{Pro.K == true ? 'Pesos' : 'Dolares'}}</label><br/></div>
+                    </div>
+                    <hr class="LSep">
+                </ng-template>
+            </ng-template>
+        </p-dataList>
+    </p-overlayPanel>
+
+    <p-dataTable [value]="Pro" [immutable]="false"  [rows]="8" [paginator]="true">
+        <p-header>
+            <label class="Usr">Buscador avanzado:</label>
+            <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" [style]="{'width':'90rem'}"></p-chips>
+        </p-header>
+        <p-column styleClass="col-button">
+            <ng-template pTemplate="header">
+                <button type="button" pButton (click)="export()" icon="fa-file-text"></button><label id="Cel">Exportar</label>
+            </ng-template>
+            <ng-template let-pro="rowData" pTemplate="body">
+                <button type="button" pButton (click)="EditPro(pro)" icon="fa fa-pencil"></button>
+                <button type="button" pButton (click)="ElimPro(pro)" icon="fa fa-trash"></button>
+                <button type="button" pButton (click)="Shower(pro.Contactos, op, $event, 'A')" icon="fa fa-users"></button>
+                <button type="button" pButton (click)="Shower(pro.Bank, op, $event, 'Z')" icon="fa fa-money"></button>
+            </ng-template>
+        </p-column>
+        <p-column field="Alias" header="Nombre"></p-column>
+        <p-column field="Webu" header="Usuario"></p-column>
+        <p-column field="Webp" header="Contraseña"></p-column>
+        <p-column field="Dir" header="Direccion"></p-column>
+        <p-column field="Estado" header="Estado"></p-column>
+        <p-column field="RFC" header="RFC"></p-column>
+    </p-dataTable>
+</p-fieldset>
+<br/><br/>
+<p-fieldset legend="Registro de Proveedores" styleClass="Legendary">
+    <div id='ImagineAgain'>
+        <label class="Usr">Alias:</label><input type="text" class="User" pInputText [(ngModel)]="Nm" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Razon:</label><input type="text" class="User" pInputText [(ngModel)]="Ra" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Direccion:</label><input type="text" class="User" pInputText [(ngModel)]="Dir" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Colonia:</label><input type="text" class="User" pInputText [(ngModel)]="Col" (ngModelChange)="Upper($event)"/>
+        <br/><br/>
+        <label class="Usr">Ciudad:</label><input type="text" class="User" pInputText [(ngModel)]="C" (ngModelChange)="Upper($event)"/>
+        <br/>
+        <br/>
+        <label class="Usr">Estado:</label><p-dropdown [options]="States" [(ngModel)]="Estado" [style]="{'width':'150px'}" filter="filter" (ngModelChange)="Upper($event)"></p-dropdown>
+        <label class="Usr">CP:</label><p-inputMask [(ngModel)]="CP" mask="99999" (ngModelChange)="Upper($event)"></p-inputMask>
+        <label class="Usr">RFC:</label><p-inputMask [(ngModel)]="RFC" mask="aaa*9999****?*" (ngModelChange)="Upper($event)"></p-inputMask>
+        <br/><br/>
+        <div class="ui-g-12">
+            <div class="ui-g-6 ui-sm-8 ui-md-8 ui-lg-4"><label class="Usr">Direccion Web:</label><input type="text" pInputText [(ngModel)]="WebA"/></div>
+            <div class="ui-g-3 ui-sm-6 ui-md-6 ui-lg-4"><label class="Usr">Usuario:</label><input type="text" pInputText [(ngModel)]="WebU"/></div>
+            <div class="ui-g-3 ui-sm-6 ui-md-6 ui-lg-4"><label class="Usr">Contraseña:</label><input type="text" pInputText [(ngModel)]="WebP"/></div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g" *ngFor='let A of B'>
+                <div class="ui-g-12"><hr class="LSep2"><label id="Cel" style="color:#1481ff; font-weight: bold !important;">Contacto {{A.ID +1}}</label></div>
+                <div class="ui-g-4 ui-sm-8 ui-md-6 ui-lg-4"><label id="Cel">Nombre:</label><input type="text" id="Cont2" [(ngModel)]="A.Nom" (ngModelChange)="Upper($event)"/></div>
+                <div class="ui-g-4 ui-sm-8 ui-md-6 ui-lg-3"><label id="Cel">Puesto:</label><input type="text" id="Cont2" [(ngModel)]="A.Cargo" (ngModelChange)="Upper($event)"/></div>
+                <div class="ui-g-4 ui-sm-8 ui-md-6 ui-lg-5">
+                    <button type="button" pButton (click)="B[A.ID].Tel.push({ID:this.B[A.ID].Tel.length,Tel:'',T:'1'})" icon="fa fa-phone" style="float: right; left:3%;" label='+'></button>
+                    <div *ngFor='let C of A.Tel'>
+                        <p-dropdown [options]="One" [(ngModel)]="C.T" [style]="{'width':'85px'}"></p-dropdown><input type="text" id="Cont2"[(ngModel)]="C.Tel" (ngModelChange)="Upper($event)" style="width:58%;"/>
+                        <button type="button" pButton (click)="Elimthis(A.ID, 0, 'Tel', undefined, C.ID)" icon="fa fa-times" ></button>
+                    </div>
+                </div>
+                <div class="ui-g-4 ui-sm-8 ui-md-6 ui-lg-5">
+                    <button type="button" pButton (click)="B[A.ID].Mail.push({ID:this.B[A.ID].Mail.length,Mail:'',T:'1'})" icon="fa fa-envelope" id="ListPlus" label='+'></button>
+                    <div *ngFor='let C of A.Mail'>
+                        <p-dropdown [options]="Two" [(ngModel)]="C.T" [style]="{'width':'82px'}" ></p-dropdown><input type="text" id="Cont2"[(ngModel)]="C.Mail" (ngModelChange)="Upper($event)" style="width:58%;"/>
+                        <button type="button" pButton (click)="Elimthis(A.ID, 0, 'Mail', undefined, C.ID)" icon="fa fa-times" style=""></button>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12">
+                    <button type="button" pButton (click)="B.length == 1 ? G.push({severity:'error',summary:'Accion no permitida', detail:'Debe tener minimo un contacto'}):Elimthis(A.ID, 1, undefined, B)" icon="fa fa-user-times"></button><label id="Cel">Eliminar Contacto</label>
+                </div>
+            </div><br/>
+            <button type="button" pButton (click)="B.push({ID:this.B.length, Nom:'', Cargo:'', Tel:[{ID:0,Tel:'', T:'1'}], Mail:[{ID:0,Mail:'', T:'1'}]})" icon="fa fa-user-plus"></button><label id="Cel">Agregar contacto</label>
+            <br/><br/>
+            <div class="ui-g" *ngFor='let C of D'>
+                <div class="ui-g-12"><hr class="LSep2"><label id="Cel" style="color:#1481ff; font-weight: bold !important;">Cuenta:</label></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Banco:</label><br/><input type="text" id="Cont2" [(ngModel)]="C.Bank" /></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Sucursal:</label><br/><input type="text" id="Cont2" [(ngModel)]="C.Succ" /></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Direccion:</label><br/><input type="text" id="Cont2" [(ngModel)]="C.Dir" /></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Cuenta:</label><br/><input type="text" id="Cont2" [(ngModel)]="C.Acc" /></div>
+                <div class="ui-g-2 ui-sm-6 ui-md-4 ui-lg-2"><label id="Cel">CLABE:</label><br/><input type="text" id="Cont2" [(ngModel)]="C.Clab" /></div>
+                <div class="ui-g-2 ui-sm-6 ui-md-4 ui-lg-2"><label id="Cel">Referencia:</label><br/><input type="text" id="Cont2" [(ngModel)]="C.Ref" /></div>
+                <div class="ui-g-2 ui-sm-6 ui-md-4 ui-lg-2"><label id="Cel">Tipo:</label><br/><p-toggleButton [style]= "{'margin-top':'5px'}" onLabel="Dolares" offLabel="Pesos " [(ngModel)]="C.K" [style]="{'width':'5rem'}"></p-toggleButton></div>
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12">
+                    <button type="button" pButton (click)="D.length == 1 ? G.push({severity:'error',summary:'Accion no permitida', detail:'Debe tener minimo una cuenta bancaria'}):Elimthis(C.ID, 1, undefined, D)" icon="fa fa-usd" label='x'></button><label id="Cel">Eliminar Cuenta</label>
+                </div>
+            </div>
+            <br/>
+            <button type="button" pButton (click)="D.push({Bank:'', Acc:'', Clab:'', Ref:'', K:0, ID: D.length})" icon="fa fa-usd"></button><label id="Cel">Agregar Cuenta</label>
+            <br/><br/>
+            <div class="ui-g" *ngFor='let D of E'>
+                <div class="ui-g-12"><hr class="LSep2"><label id="Cel" style="color:#1481ff; font-weight: bold !important;">Responsable de Entrega:</label></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Responsable:</label><br/><input type="text" id="Cont2" [(ngModel)]="D.Nam" /></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Telefono:</label><br/><input type="text" id="Cont2" [(ngModel)]="D.Cel" /></div>
+                <div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-3"><label id="Cel">Correo:</label><br/><input type="text" id="Cont2" [(ngModel)]="D.Mail" /></div>
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12">
+                    <button type="button" pButton (click)="D.length == 1 ? G.push({severity:'error',summary:'Accion no permitida', detail:'Debe tener minimo un responsable de entrega'}):Elimthis(D.ID, 1, undefined, E)" icon="fa fa-home" label='x'></button><label id="Cel">Eliminar Responsable</label>
+                </div>
+            </div>
+            <button type="button" pButton (click)="E.push({Add:'', Resp:'', Clab:'', Ref:'', ID: D.length})" icon="fa fa-user"></button><label id="Cel">Agregar Responsable</label>
+            <br/><br/>
+        </div>
+        <button pButton type="button" label="Aceptar" (click)="Registerer()" [disabled]="Nm.length==0"></button>
+    </div>
+</p-fieldset>

@@ -1,0 +1,36 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca el nuevo nombre</label><br/>
+    <input type="text" size="30" pInputText [(ngModel)]="E">
+    <button type="button" pButton (click)="Pop=false" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de Cotizaciones">
+    <p-dataTable [value]="Cots" [rows]="20" [paginator]="true">
+        <p-header>
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" [style]="{'width':'90rem'}"></p-chips>
+            </div>
+        </p-header>
+        <p-column field="id" header="Editar" styleClass="col-button" [style]="{'width':'3rem'}">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                <button type="button" pButton (click)="View(De[col.field])" icon="fa fa-pencil" style="cursor:pointer;float:left;"></button>
+                <button type="button" pButton (click)="Warn(De[col.field])" icon="fa fa-times" style="cursor:pointer;float:left;"></button>
+            </ng-template>
+        </p-column>
+        <p-column field="id" header="Numero" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                <label class="Usr" style="color:#c40000;font-weight: bold !important;">{{De[col.field]+1000}}</label>
+            </ng-template>
+        </p-column>
+        <p-column field="Date" header="Fecha" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                <label class="Usr">{{ De[col.field]| date:'mediumDate'}}</label>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+    <br/>
+    <button type="button" pButton (click)="R.navigate(['New',USR])" icon="fa fa-plus" style="cursor:pointer;float:left;"></button>
+</p-fieldset>

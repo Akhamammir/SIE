@@ -1,0 +1,132 @@
+<p-growl [value]="G" life="1500"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <p-steps [model]="Items" [(activeIndex)]="activeIndex" [style]="{'margin-left': '45%'}"></p-steps>
+    <div *ngIf="activeIndex==0">
+        <label class="Usr">Empresa:</label><p-dropdown id="CDrop" [options]="Cl" [(ngModel)]="Clnt" [style]="{'width':'25rem','right':'0.4rem'}" (onChange)="Sel()"></p-dropdown>
+        <label class="Usr">Ingrese datos del Responsable de envio:</label>
+        <input class="facer" [(ngModel)]="Provided[5]" placeholder="Nombre de Responable" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Provided[6]" placeholder="Telefono de contacto" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Provided[7]" placeholder="Email del responsable" style="margin:.1cm; width:95%;" required="true"/>
+    </div>
+    <div *ngIf="activeIndex!=0">
+        <label class="Usr">Direccion de entrega:</label><p-dropdown id="CDrop" [options]="Pl" [(ngModel)]="PL" [style]="{'width':'25rem','right':'0.4rem'}" (onChange)="Set2()"></p-dropdown>
+        <label class="Usr">Ingrese datos de Entrega:</label>
+        <input class="facer" [(ngModel)]="Delivered[0]" placeholder="Lugar de Entrega" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[1]" placeholder="Nombre de Responable" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[2]" placeholder="Direccion de Entrega" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[3]" placeholder="Colonia" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[4]" placeholder="Estado" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[5]" placeholder="Ciudad" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[6]" placeholder="Telefono de contacto" style="margin:.1cm; width:95%;" required="true"/>
+        <input class="facer" [(ngModel)]="Delivered[7]" placeholder="Email del responsable" style="margin:.1cm; width:95%;" required="true"/>
+    </div>
+    <button type="button" pButton (click)="activeIndex=1" icon="fa fa-send" label="Entrega a cliente." style="cursor:pointer;float:left;" *ngIf="activeIndex==0"></button>
+    <button type="button" pButton (click)="Build(0)" icon="fa fa-send" label="Entrega en Ecosta" style="cursor:pointer;float:left;" *ngIf="activeIndex==0"></button>
+    <button type="button" pButton (click)="Build(1)" icon="fa fa-send" label="Entrega en Ecosa" style="cursor:pointer;float:left;" *ngIf="activeIndex==0"></button>
+    <button type="button" pButton (click)="Build()" icon="fa fa-send" label="OK" style="cursor:pointer;float:left;" *ngIf="activeIndex!=0"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Lista de Compras">
+    <p-overlayPanel #op (mouseleave)="op.hide()" (blur)="op.hide()" [dismissable]="true">
+        <p-dataList [value]="P2" [rows]="5">
+            <ng-template let-Pro pTemplate="item">
+                <button pButton type="button" (click)="One(Majora, op, Pro.Alias)" label="Elegir" class="ui-button-info"></button>
+                <label class="Usr">{{Pro.Alias}}</label>
+            </ng-template>
+        </p-dataList>
+    </p-overlayPanel>
+    <p-dataTable [value]="Gen" scrollable="true" [editable]="true" resizableColumns="true" columnResizeMode="expand" [rowStyleClass]="RowS" [(selection)]="Send" rowGroupMode="subheader" groupField="MID" scrollHeight="800px" [paginator]="true" [rows]="30">
+        <p-header>
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                    <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" styleClass="ChipsList" [style]="{'width':'100%'}"></p-chips>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-1">
+                    <div class="ui-inputgroup">
+                        <button type="button" pButton (click)="Adder()" icon="fa fa-plus" [disabled]="!(AddCant > 0 && AddUPrice > 0 && AddCli.length > 0 && AddUnit.length > 0 && AddDesc.length > 0 && AddCli.length > 0 && AddSerial.length > 0)" style="cursor:pointer;float:left;"></button>
+                        <input type="number" pInputText [(ngModel)]="AddCant" placeholder="Cantidad">
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-1">
+                        <input type="text" pInputText [(ngModel)]="AddCli" placeholder="Cliente">
+                    </div>
+                <div class="ui-g-12 ui-md-2">
+                    <input type="text" pInputText [(ngModel)]="AddUnit" placeholder="No. de Parte">
+                </div>
+                <div class="ui-g-12 ui-md-1">
+                    <input type="text" pInputText [(ngModel)]="AddSerial" placeholder="No Serial">
+                </div>
+                <div class="ui-g-12 ui-md-5">
+                    <input type="text" pInputText [(ngModel)]="AddDesc" placeholder="Descripcion">
+                </div>
+                <div class="ui-g-12 ui-md-1">
+                    <input type="number" pInputText [(ngModel)]="AddUPrice" placeholder="Precio Unitario">
+                </div>
+                <div class="ui-g-12 ui-md-1">
+                    <input type="text" pInputText [(ngModel)]="AddComm" placeholder="Commentario">
+                </div>
+            </div>
+        </p-header>
+        <ng-template pTemplate="rowgroupheader" let-rowData let-i=rowIndex>
+            Orden de Facturacion: {{rowData['MID']}}
+        </ng-template>
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column field="MID" header="O. de F." [style]="{'width':'8rem'}" [sortable]="true"></p-column>
+        <p-column field="Cli" header="Cliente" [style]="{'width':'8rem'}" [sortable]="true"></p-column>
+        <p-column field="Cant" header="Cant." [editable]="true" [style]="{'width':'3.5rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="Unit" header="NO. Parte" [style]="{'width':'8rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="Serial" header="No. Serial" [editable]="true" [style]="{'width':'5rem'}">
+            <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" [style]="{'width':'100%'}" autofocus="true"/>
+            </ng-template>
+            <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="Desc" header="Descripcion" [style]="{'width':'11rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{De[col.field]}}
+            </ng-template>
+        </p-column>
+        <p-column field="CInicial" header="Precio Cliente" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{((Nani(De[col.field]) ? (De['Ctot']/De['Cant']) : 0) | currency:'USD':true:'1.0-2')}}
+            </ng-template>
+        </p-column>
+        <p-column field="Comm" header="Comm. V." [style]="{'width':'10rem'}">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{ De[col.field] }}
+            </ng-template>
+        </p-column>
+        <p-column field="TdE" header="T. Entrega" [editable]="true" [style]="{'width':'10rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="editor">
+                <input class="facer" [(ngModel)]="De[col.field]" placeholder="Proovedor de compra" style="margin:.1cm; width:95%;" [disabled]="!De['Approved'] ? true:false" required="true"/>
+            </ng-template>
+        </p-column>
+        <p-column field="Date" header="Fecha" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                {{ De[col.field]| date:'mediumDate'}}
+            </ng-template>
+        </p-column>
+        <p-column field="Date" header="Tiempo Transc." [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                Hace {{DateR(De[col.field], Gen[i].ID)}} dias
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+    <br/>
+    <p>Comentarios:</p>
+    <textarea pInputTextarea [(ngModel)]="CommRem" [rows]="7" [cols]="150" autoResize="autoResize" ></textarea>
+    <br/>
+    <button type="button" pButton (click)="Go()" icon="fa fa-send" label="Generar Remision" style="cursor:pointer;float:left;" [disabled]="Roll!='000' && Roll!='145'"></button>
+</p-fieldset>

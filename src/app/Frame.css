@@ -1,0 +1,649 @@
+@font-face {
+  font-family: "Rales";
+  src: url("../assets/Font/Raleway.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.CalDialog .ui-dialog-titlebar {
+    background: cornflowerblue!important;
+    border: cornflowerblue;
+}
+.CalDialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
+    color: #F2F3F4;
+}
+.ChipsList .ui-inputtext {
+    width: 112rem!important;
+    overflow: unset;
+}
+.ChipsListSm .ui-inputtext {
+    width: 78rem!important;
+    overflow: unset;
+}
+body .ui-table .ui-table-tbody > tr.ui-state-highlight {
+    color: #406e8e!important;
+}
+ #Log{
+    position: fixed;
+    height:100%;
+    width: 300px;
+    top:0;
+    right:0; 
+    background-color: #F2F3F4;
+    box-shadow: 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+ }
+#Cont{
+    position: fixed;
+    top: 25%;
+}
+#ELogo{
+    width:100%; /* you can use % */
+    height: auto;
+}
+#BkG{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size:contain;
+    background-position:center;
+    max-height:100%;
+}
+.Logg{
+    position: absolute;
+    left: 13%;
+    width: 70%;
+    font-family: "Rales";
+    padding: 10px;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+.User{
+    position: absolute;
+    left: 9rem;
+    width: 72%;
+    display: inline-block;
+    font-family: "Rales";
+    padding: 7.5px;
+    margin-top: -.25rem;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+.facer{
+    font-family: "Rales";
+    padding: 7.5px;
+    margin-top: -.25rem;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+.facerL{
+    font-family: "Rales";
+    padding: 7.5px;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+    position: relative;
+    z-index: 5;
+}
+#Prod{
+    position: relative;
+    left: 0%;
+    width: 15%;
+    margin-left: 1%;
+    font-family: "Rales";
+    padding: 10px;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+#ProdL{
+    font-family: "Rales";
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 1rem;
+    padding-right: 40px;
+    padding-left: 5px;
+}
+#CotL{
+    font-family: "Rales";
+    position: absolute;
+    width: 30rem;
+    left: 13rem;
+    vertical-align: middle;
+    display: inline-block;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+    background-color: #fe9920;
+}
+#CotG{
+    font-family: "Rales";
+    position: absolute;
+    width: 30rem;
+    left: 6rem;
+    vertical-align: middle;
+    display: inline-block;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+    background-color: #F2F3F4;
+}
+#Coin{
+    font-family: "Rales";
+    position: relative;
+    width: 4rem;
+    left: .3rem;
+    vertical-align: middle;
+    display: inline-block;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+    background-color: #F2F3F4;
+}
+#CotL2{
+    font-family: "Rales";
+    position: absolute;
+    width: 30rem;
+    left: 11rem;
+    vertical-align: middle;
+    display: inline-block;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+#ProdL2{
+    font-family: "Rales";
+    vertical-align: middle;
+    font-size: 1rem;
+    margin-top: -10px;
+    padding-bottom: 100px;
+    padding-right: 35px;
+    padding-left: 5px;
+}
+#ProdA{
+    position: relative;
+    left: 0%;
+    width: 55%;
+    font-family: "Rales";
+    padding: 10px;
+    margin-left: 1%;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+#ProdS{
+    position: relative;
+    left: 0%;
+    width: 65%;
+    font-family: "Rales";
+    display: inline-block;
+    vertical-align: middle;
+    align-items: center;
+}
+#ProdC{
+    position: relative;
+    left: 0%;
+    width: 55%;
+    font-family: "Rales";
+    display: inline-block;
+    vertical-align: middle;
+    align-items: center;
+}
+#Cont2 {
+    position: relative;
+    left:0%;
+    width: 66%;
+    font-family: "Rales";
+    padding: 10px;
+    border: solid 1px #fff;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+#Cel{
+    font-family: "Rales";
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 1rem;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+hr.LSep { 
+    height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+hr.LSep2{ 
+    height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    box-sizing: inherit;
+    width: 144%;
+}
+.Logg.focus {
+  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+.Usr{
+    font-family: "Rales";
+    vertical-align: middle;
+    padding-top: .1rem;
+    display: inline-block;
+    font-size: 1rem;
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.Red{
+    color: #c40000;
+    font-family: "Rales";
+    font-weight: bold !important;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 1rem;
+    padding-right: 15px;
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+.Blk{
+    font-family: "Rales";
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 1rem;
+    padding-right: 15px;
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+button{
+    font-family: "Rales";
+}
+#Acc{
+    margin-left: 3px;
+    font-size: .9rem;
+}
+#FPwd{
+    float: right;
+    margin-right: 3px;
+    font-size: .9rem;
+
+}
+menuitem{
+    height:100% !important;
+    font-family: "Rales";
+}
+#LeftRapp {
+    position: fixed;
+    height: 100%;
+    width: 20%;
+    background-color: #262626;
+    z-index: 3;
+    top:47px; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0px;
+    display: none; 
+}
+.submenuItems {
+    color: white;
+    margin-left: 15px;
+    font-family: "Rales";
+    display: none;
+    position: fixed;
+    top:40px;
+    padding: 0;
+    list-style-type: none;
+    background-color: #0559AD;
+    transition: all 0.4s ease-out;
+}
+.submenuItems li {
+    text-align: left;
+    padding: 4px;
+    width: 8rem;
+    font-size: 1rem;
+    text-decoration: none;
+}
+.dropdownlink {
+    font-family: "Rales";
+    list-style-type: none;
+    cursor: pointer;
+    display: block;
+    margin: 0;
+    font-size: 18px;
+    color: #3894FF;
+    position: relative;
+    transition: all 0.4s ease-out;
+}
+#Col{
+    width:33%;
+    margin-bottom:-2px;
+}
+#LEFT {
+    color: white;
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right:  1px solid #F2F3F4;
+}
+.accordion-menu {
+  width: 100%;
+  max-width: 350px;
+  margin: 60px auto 20px;
+  background: #fff;
+  border-radius: 4px;
+}
+.dropdownlink i {
+    position: absolute;
+    top: 17px;
+    left: 16px;
+  }
+.dropdownlink .fa-chevron-down {
+    right: 12px;
+    left: auto;
+  }
+hr.Menu {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(200, 200, 200, 0), rgba(200, 200, 200, 0.75), rgba(200, 200, 200, 0));
+}
+#RightRapp {
+    position:absolute;
+    top:10%;
+    margin: 0px; 
+    display: inline-block; 
+}
+#Menu{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    z-index: 4;
+    background:#0559AD;
+    padding: 10px;
+    -moz-box-shadow:    3px 3px 5px 6px #262626;
+    -webkit-box-shadow: 3px 3px 5px 6px #262626;
+    box-shadow:         1px 1px 1.4px 2px #262626;
+}
+#MMenu{
+    position: fixed;
+    height:100% !important;
+    font-family: "Rales";
+    top:-5;
+    left:-5; 
+}
+#ListPlus{
+    float: right;
+    left:-2%;
+    top:6px;
+}
+Legendary .ui-fieldset, .ui-fieldset .ui-fieldset-legend {
+    background-color: #269AE8;
+    color: #FFFEFF;
+    position: relative;
+    top: -20px;
+    right: 5px;
+    border-color: transparent;
+    font-family: "Rales";
+}
+.ui-datatable-data> tr> {
+  height: auto!important;
+}
+.ui-datatable-data> tr> td {
+  white-space: nowrap;
+  word-break: keep-all;
+  word-wrap: break-word;
+  white-space: normal;
+  height: auto!important;
+}
+.ui-datatable-thead> tr> th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+#Imagine{
+    position: relative;
+    float: right;
+    max-width: 60%;
+}
+#Half{
+    position: relative;
+    float: left;
+    min-width: 50%;
+    max-width: 50%;
+}
+#Halve{
+    position: relative;
+    float: right;
+    min-width: 50%;
+    max-width: 50%;
+}
+#Imagine img{
+    float: right;
+    max-height: 700px;
+    max-width: 50%;
+}
+#ImagineAgain{
+    position: relative;
+    max-width: 70%;
+}
+.FAB{
+    position: fixed;
+    bottom:5%;
+    right:5%;
+    width: 3rem;
+    height: 3rem;
+    z-index: 100;
+}
+.ViewChk > *{
+    opacity: 1.0!important;
+    margin-left: 1.4rem;
+}
+th.Headless.ui-state-default.ui-unselectable-text{
+    display: none !important;
+}
+span.ui-radiobutton-icon.fa.fa-circle{
+    color: yellow;
+}
+#CCal > span.ng-tns-c6-5.ui-calendar > input.ng-tns-c6-5.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    vertical-align: super;
+}
+#CCal > span.ng-tns-c4-2.ui-calendar > input.ng-tns-c4-2.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    vertical-align: super;
+}
+#CDrop > div.ng-tns-c5-3.ui-dropdown.ui-widget.ui-state-default.ui-corner-all.ui-helper-clearfix.ui-dropdown-open > div.ng-tns-c5-3.ui-dropdown-panel.ui-widget-content.ui-corner-all.ui-helper-hidden.ui-shadow.ng-trigger.ng-trigger-panelState > div.ui-dropdown-filter-container.ng-tns-c5-3{
+    width: 100%!important;
+}
+#CDrop > span.fa.fa-search{
+    position: absolute;
+    top: .5em;
+    right: -70%;
+}
+td.Smol{
+    width:5px !important;
+}
+.Awww{
+    background-color:#820217!important;
+    color: #F2F4F6;
+    font-weight: 'bold';
+}
+.Yaay{
+    background-color:#3C963C!important;
+    font-weight: '1500';
+}
+.EnEspera{
+    color: #840205;
+    font-weight: '1500';
+}
+.Cotizando{
+    color: #DB3600;
+    font-weight: '1500';
+}
+.CompradoEcosa{
+    color: #FF4800;
+    font-weight: '1500';
+}
+.ComrpadoDirecto{
+    color: #F45D00;
+    font-weight: '1500';
+}
+.Envio{
+    color: #FF8800;
+    font-weight: '1500';
+}
+.Recepcion{
+    color: #FFD800;
+    font-weight: '1500';
+}
+.Facturacion{
+    color: #B3BE19;
+    font-weight: '1500';
+}
+.Cobranza{
+    color: #259609;
+    font-weight: '1500';
+}
+.ui-inputswitch-on{
+    background: #1F6836!important;
+}
+.ui-inputswitch-off{
+    background: #D63428!important;
+}
+.Compras span.ui-button.ui-fileupload-choose.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left{
+    height: 1.8rem;
+}
+@media (min-width:300px) {
+   #Log {
+    width: 250px;
+   }
+ }
+ @media (max-width:1200px){
+     #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+ @media (max-width:800px){
+     #CotL{
+       width: 32rem;
+   }
+   #CotL2{
+       width: 32rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+ @media (max-width:750px){
+     #CotL{
+       width: 30rem;
+   }
+   #CotL2{
+       width: 30rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+ @media (max-width:700px){
+     #CotL{
+       width: 28rem;
+   }
+   #CotL2{
+       width: 28rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+  @media (max-width:650px){
+     #CotL{
+       width: 26rem;
+   }
+   #CotL2{
+       width: 26rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+ @media (max-width:600px){
+     #CotL{
+       width: 24rem;
+   }
+   #CotL2{
+       width: 24rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+ @media (max-width:550px){
+     #CotL{
+       width: 22rem;
+   }
+   #CotL2{
+       width: 22rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+@media (max-width:450px){
+     #CotL{
+       width: 20rem;
+   }
+   #CotL2{
+       width: 20rem;
+   }
+   #Cont2{
+       width: 5rem;
+   }
+   #Oompa{
+       margin-left: 2rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+ @media (max-width:400px){
+     #CotL{
+       width: 16rem;
+    }
+    #CotL2{
+       width: 16rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }
+  @media (max-width:350px){
+     #CotL{
+       width: 11rem;
+   }
+   #CotL2{
+       width: 11rem;
+   }
+   #ListPlus{
+    float: right;
+    left:-2%;
+    top:0%
+    }
+ }

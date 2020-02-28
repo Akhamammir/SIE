@@ -1,0 +1,119 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca el nuevo nombre</label><br/>
+    <input type="text" size="30" pInputText [(ngModel)]="E">
+    <button type="button" pButton (click)="Pop=false" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de Ordenes de Facturacion">
+    <p-table [columns]="Cols" [value]="Cots"  [(selection)]="Send" [rows]="20" [paginator]="true">
+        <ng-template pTemplate="caption">
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" styleClass="ChipsListSm" [style]="{'width':'100%'}"></p-chips>
+                <!--<p-selectButton [options]="Kolors" [(ngModel)]="Color" (ngModelChange)="Colorer()"></p-selectButton>-->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th>
+                    Acciones
+                </th>
+                <th>
+                    OC
+                </th>
+                <th>
+                    Proveedor
+                </th>
+                <th>
+                    Entrega en
+                </th>
+                <th>
+                    Comision
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Dias Transcurridos
+                </th>              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-columns="columns">
+            <tr>
+                <td>
+                    <button type="button" pButton (click)="POs(rowData.PO,rowData.Prov, rowData.SendA, rowData.Content, undefined, rowData.DateG)" icon="fa fa-search-plus " style="cursor:pointer;float:left; width:2rem;"></button>
+                    <button type="button" pButton (click)="Warn(rowIndex, rowData.PO)" icon="fa fa-times" style="cursor:pointer;float:left;width:2rem;"></button>
+                </td>
+                <td>
+                    <label class="Usr" style="color:#c40000;font-weight: bold !important;">{{rowData.PO}}</label>
+                </td>
+                <td>
+                    {{rowData.Prov ? rowData.Prov[0] : 'Loading...'}}
+                </td>
+                <td>
+                    {{rowData.SendA ? rowData.SendA[0] : 'Loading...'}}
+                </td>
+                <td>
+                    {{(rowData.Commission/ 100) | percent:'1.2-2'}}
+                </td>
+                <td>
+                    <label class="Usr">{{ rowData.DateG| date:'mediumDate'}}</label>
+                </td>
+                <td>
+                    Dias Transcurridos: {{Day(rowData.DateG, rowData.PO)}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <!--<p-dataTable [value]="Cots" [rowStyleClass]="RowS" [rows]="35" [paginator]="true">
+        <p-header>
+            <label class="Usr">Buscador avanzado:</label>
+            <div class="ui-inputgroup">
+                <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" [style]="{'width':'60rem'}"></p-chips>
+                <p-selectButton [options]="Kolors" [(ngModel)]="Color" (ngModelChange)="Colorer()"></p-selectButton>
+            </div>
+        </p-header>
+        <p-column field="id" header="Editar" styleClass="col-button" [style]="{'width':'5rem'}">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                <div class="ui-inputgroup">
+                    <button type="button" pButton (click)="R.navigate(['Fact','!?'+De[col.field]+','+USR,111])" icon="fa fa-pencil" style="cursor:pointer;float:left;"></button>
+                    <button type="button" pButton (click)="Facts(De[col.field])" icon="fa fa-search-plus " style="cursor:pointer;float:left;"></button>
+                    <button type="button" pButton (click)="Warn(De[col.field])" icon="fa fa-times" style="cursor:pointer;float:left;"></button>
+                </div>
+            </ng-template>
+        </p-column>
+        <p-column field="id" header="Numero" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                <label class="Usr" style="color:#c40000;font-weight: bold !important;">{{De[col.field]}}</label>
+            </ng-template>
+        </p-column>
+        <p-column field="Maker" header="Ejecutivo" [style]="{'width':'10rem'}" [sortable]="true"></p-column>
+        <p-column field="Name" header="Nombre" [style]="{'width':'13rem'}" [sortable]="true"></p-column>
+        <p-column field="Cli" header="Cliente" [style]="{'width':'8rem'}" [sortable]="true"></p-column>
+        <p-column field="DateG" header="Fecha" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                {{De[col.field] | date:'mediumDate'}}
+            </ng-template>
+        </p-column>
+        <p-column field="DateG" header="Dias Transcurridos" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                Dias Transcurridos: {{Day(De[col.field], De.id, De.Stat)}}
+            </ng-template>
+        </p-column>
+        <p-column field="stat" header="Estado" [style]="{'width':'8rem'}" [sortable]="true">
+            <ng-template let-col let-De="rowData" pTemplate="body">
+                <span class="{{Stater(De[col.field], 'color')}}">
+                    {{Stater(De[col.field])}}
+                </span>
+            </ng-template>
+        </p-column>
+        <p-column field="Approved" header="Aprobado" [style]="{'width':'14rem'}" [sortable]="true">
+            <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                <p-inputSwitch onLabel="Aprobada" offLabel="No Aprobada" [(ngModel)]="De[col.field]" (ngModelChange)="Altered(De['id'],De[col.field])" ></p-inputSwitch>
+            </ng-template>
+        </p-column>
+    </p-dataTable>-->
+    <br/>
+</p-fieldset>

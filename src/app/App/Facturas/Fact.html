@@ -1,0 +1,92 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Orden de facturacion" styleClass="Legendary">
+    <p-dataTable [value]="A" [editable]="true" [immutable]="false">
+            <p-column field="Cant" header="Cantidad" [editable]="true" [style]="{'width':'3rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="editor">
+                    <input class="facer" [(ngModel)]="De[col.field]" (ngModelChange)="Upper(De[col.field],A.ID,i)" [style]="{'width':'100%'}" required="true"/>
+                </ng-template>
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body">
+                    {{ De[col.field]}}
+                </ng-template>
+            </p-column>
+            <p-column field="Unit" header="Unidad/Num Parte" [style]="{'width':'8rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body">
+                    {{(De[col.field])}}
+                </ng-template>
+            </p-column>
+            <p-column field="Desc" header="Descripcion" [style]="{'width':'10rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body">
+                    {{(De[col.field])}}
+                </ng-template>
+            </p-column>
+            <p-column field="Prov" header="Proveedor" [editable]="false" [style]="{'width':'8rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body">
+                    {{(A[i].PReal ? A[i].PReal : De[col.field])}}
+                </ng-template>
+            </p-column>
+            <br/>
+            <p-column field="CInicial" header="Costo" [editable]="false" [style]="{'width':'7rem'}">
+                <ng-template let-col let-De="rowData" pTemplate="body">
+                    {{(De[col.field] | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="Koin" header="Moneda C" [editable]="false" [style]="{'width':'7rem'}">
+                <ng-template let-col let-De="rowData" pTemplate="body">
+                    {{De[col.field]}}
+                </ng-template>
+            </p-column>
+            <p-column field="TC" header="T. de C." [style]="{'width':'5.5rem'}">
+                <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                    {{(De[col.field] | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="Ctot" header="Importe Unit." [style]="{'width':'7rem'}">
+                <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                    {{(De[col.field]/(A[i].Cant) | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="Ctot" header="Importe" [style]="{'width':'7rem'}">
+                <ng-template let-col let-De="rowData" pTemplate="body">
+                    {{(De[col.field] | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="UNet" header="Utilidad U." [style]="{'width':'7rem'}">
+                <ng-template let-col let-i="rowIndex" let-De="rowData" pTemplate="body">
+                    {{(De[col.field]/(A[i].Cant) | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="DeliveryCF" header="Gastos de envio" [style]="{'width':'7rem'}">
+                <ng-template let-col let-De="rowData" pTemplate="body">
+                    {{(De[col.field] | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="UNet" header="Util. Total" [style]="{'width':'7rem'}">
+                <ng-template let-col let-De="rowData" pTemplate="body">
+                    {{(De[col.field] | currency:'USD':true:'1.2-2')}}
+                </ng-template>
+            </p-column>
+            <p-column field="Stat" header="Estatus" [style]="{'width':'7rem'}" >
+                <ng-template let-col let-De="rowData" pTemplate="body">
+                    <span class="{{Stater(De[col.field].Stat, 'color')}}">{{Stater(De[col.field].Stat)}}</span>
+                </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" [style]="{'width':'9rem'}">
+                <ng-template let-col let-De="rowData" let-i="rowIndex" pTemplate="body" style="width:3rem">
+                    <div class="ui-inputgroup">
+                        <button pButton type="button" icon="fa fa-users"></button>
+                        <button pButton type="button" icon="fa fa-times"></button>
+                        <button pButton type="button" icon="fa fa-plus"></button>
+                        <button pButton type="button" icon="fa fa-search" (click)="Facts()"></button>
+                    </div>
+                </ng-template>
+            </p-column>
+    </p-dataTable>
+    <div style="display:block">
+        <label class="Usr" style="color:#c40000;font-weight: bold !important; margin-left:52rem;">Total:</label>
+        <label class="Usr" style="display:inline; font-weight: bold !important; margin-left:-0.6rem;">{{ITot | currency:'USD':true:'1.0-2'}}</label>
+        <label class="Usr" style="display:inline; font-weight: bold !important; margin-left:8.2rem;">{{GdTot | currency:'USD':true:'1.0-2'}}</label>
+        <label class="Usr" style="display:inline; font-weight: bold !important; margin-left:4.5rem;">{{UTot | currency:'USD':true:'1.0-2'}}</label>
+    </div>
+</p-fieldset>

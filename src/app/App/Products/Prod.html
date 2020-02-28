@@ -1,0 +1,42 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Pop" [responsive]="true">
+    <p-listbox [options]="Cat" [(ngModel)]="Cate" filter="filter" id="ProdS" (ngModelChange)="Upper($event)"></p-listbox>
+    <br/><br/>
+    <button type="button" pButton (click)="Pop=false" icon="fa fa-check" label = "Aceptar"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="Catalogo de productos">
+    <p-dataTable [value]="Prod" [immutable]="false" [rows]="5" [paginator]="true">
+        <p-header>
+            <label class="Usr">Buscador avanzado:</label>
+            <p-chips [(ngModel)]="F" (ngModelChange)="Filter($event)" [style]="{'width':'90rem'}"></p-chips>
+        </p-header>
+        <p-column styleClass="col-button">
+            <ng-template pTemplate="header">
+                <button type="button" pButton (click)="export()" icon="fa-file-text"></button><label id="Cel">Exportar</label>
+            </ng-template>
+            <ng-template let-prod="rowData" pTemplate="body">
+                <button type="button" pButton (click)="Edit(prod)" icon="fa fa-pencil"></button>
+                <button type="button" pButton (click)="DelProd(prod.id)" icon="fa fa-trash"></button>
+                <button type="button" pButton (click)="ElimPro(pro)" icon="fa fa-trash"></button>
+            </ng-template>
+        </p-column>
+        <p-column field="PartNo" header="Num. de Parte"></p-column>
+        <p-column field="ShortD" header="Descripcion Corta"></p-column>
+        <p-column field="LongD" header="Descripcion Larga"></p-column>
+        <p-column field="Cat" header="Categoria"></p-column>
+    </p-dataTable>
+</p-fieldset>
+<br/><br/>
+<p-fieldset legend="Registro de productos" styleClass="Legendary">
+    <label class="Usr">Num. de Parte:</label><input type="text" id="Prod" pInputText [(ngModel)]="Pno" (ngModelChange)="Upper($event)"/>
+    <div id="ProdC"><label class="Usr">Categoria:</label> <button type="button" pButton (click)="Cats(pro)" icon="fa fa-eercast" label = "Seleccionar"></button> <label class="Usr">Categoria Seleccionada: {{Cate}}</label></div><br/><br/>
+    <label id="ProdL">Desc. Corta:</label><input type="text" id="ProdA" pInputText [(ngModel)]="DesC" (ngModelChange)="Upper($event)" /><br/> <br/>
+    <label id="ProdL2">Desc. Larga:</label><textarea pInputTextarea id="ProdA" [(ngModel)]="DesL" (ngModelChange)="Upper($event)"></textarea><br/> <br/>
+    <label id="ProdL">Cat. Hacienda:</label><input type="text" id="ProdA" pInputText [(ngModel)]="CaH" (ngModelChange)="Upper($event)" /><br/> <br/>
+    <label id="ProdL2">Desc. Hacienda:</label><textarea pInputTextarea id="ProdA" [(ngModel)]="DesH" (ngModelChange)="Upper($event)" ></textarea><br/> <br/>
+    <p-fileUpload id="Half" [name]="Img" url="http://localhost:4200/Upp" (onSelect)="onSelect($event)" [disabled]= "dis" (onUpload)="onUpload($event)" (onError)="onError($event)" accept="image/*" uploadLabel="Subir" chooseLabel="Seleccionar Imagen" cancelLabel="Cancelar" styleClass="Imagine"></p-fileUpload>
+    <div id='Halve'><p-fileUpload [name]="Img" url="http://localhost:4200/Upp" (onSelect)="onSelect($event)" [disabled]= "dis" (onUpload)="onUpload($event)" (onError)="onError($event)" accept="image/*" uploadLabel="Subir" chooseLabel="Seleccionar PDF" cancelLabel="Cancelar" styleClass="Imagine"></p-fileUpload></div><br/><br/>
+    <button type="button" pButton (click)="Adder()" icon="fa fa-check" label = "Aceptar" [disabled]="ena"></button>
+</p-fieldset>

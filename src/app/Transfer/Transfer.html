@@ -1,0 +1,87 @@
+<p-growl [value]="G"></p-growl>
+<p-confirmDialog header="Confirme" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Modificar" [(visible)]="Dis" [responsive]="true">
+    <label class="Usr">Introduzca la nueva Configuracion</label><br/>
+    <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="Conf"></textarea>
+    <button type="button" pButton (click)="Change()" label="Aceptar" style="cursor:pointer;float:left;"></button>
+</p-dialog>
+<br/><br/><br/><br/><br/>
+<p-fieldset legend="No se como llegaste aqui pero NO TOQUES NADA">
+    <button type="button" pButton (click)="One()" icon="fa fa-connectdevelop" label="Usuarios" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Two()" icon="fa fa-connectdevelop" label="Proveedores" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Three()" icon="fa fa-connectdevelop" label="Clientes" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Four()" icon="fa fa-connectdevelop" label="Productos" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Five()" icon="fa fa-connectdevelop" label="Categorias" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Six()" icon="fa fa-connectdevelop" label="Roles" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Seven()" icon="fa fa-connectdevelop" label="Cots" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Eight()" icon="fa fa-connectdevelop" label="Facts" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Nine()" icon="fa fa-connectdevelop" label="Po's" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Verify('Cots')" icon="fa fa-hubspot" label="Verify Db Integrity" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Verify('Mail')" icon="fa fa-hubspot" label="Verify Mail" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Adjust()" icon="fa fa-hubspot" label="Verify Facts Integrity" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Dis=true" icon="fa fa-cogs" label="setup Base" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Sum()" icon="fa fa-cogs" label="Configure counts" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Sum2()" icon="fa fa-cogs" label="Configure counts in facts" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Sum3()" icon="fa fa-cogs" label="Configure counts in cots" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Month(0)" icon="fa fa-cogs" label="Configure facts in Jan" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(1)" icon="fa fa-cogs" label="Configure facts in Feb" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(2)" icon="fa fa-cogs" label="Configure facts in Mar" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(3)" icon="fa fa-cogs" label="Configure facts in Apr" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(4)" icon="fa fa-cogs" label="Configure facts in May" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(5)" icon="fa fa-cogs" label="Configure facts in Jun" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(6)" icon="fa fa-cogs" label="Configure facts in Jul" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(7)" icon="fa fa-cogs" label="Configure facts in Ago" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(8)" icon="fa fa-cogs" label="Configure facts in Sep" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(9)" icon="fa fa-cogs" label="Configure facts in Sep" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(10)" icon="fa fa-cogs" label="Configure facts in Nov" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month(11)" icon="fa fa-cogs" label="Configure facts in Dec" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Month2(0)" icon="fa fa-cogs" label="Configure cots in Jan" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(1)" icon="fa fa-cogs" label="Configure cots in Feb" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(2)" icon="fa fa-cogs" label="Configure cots in Mar" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(3)" icon="fa fa-cogs" label="Configure cots in Apr" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(4)" icon="fa fa-cogs" label="Configure cots in May" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(5)" icon="fa fa-cogs" label="Configure cots in Jun" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(6)" icon="fa fa-cogs" label="Configure cots in Jul" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(7)" icon="fa fa-cogs" label="Configure cots in Ago" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(8)" icon="fa fa-cogs" label="Configure cots in Sep" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(9)" icon="fa fa-cogs" label="Configure cots in Sep" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(10)" icon="fa fa-cogs" label="Configure cots in Nov" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month2(11)" icon="fa fa-cogs" label="Configure cots in Dec" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Month3(0)" icon="fa fa-cogs" label="Configure utils in Jan" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(1)" icon="fa fa-cogs" label="Configure utils in Feb" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(2)" icon="fa fa-cogs" label="Configure utils in Mar" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(3)" icon="fa fa-cogs" label="Configure utils in Apr" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(4)" icon="fa fa-cogs" label="Configure utils in May" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(5)" icon="fa fa-cogs" label="Configure utils in Jun" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(6)" icon="fa fa-cogs" label="Configure utils in Jul" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(7)" icon="fa fa-cogs" label="Configure utils in Ago" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(8)" icon="fa fa-cogs" label="Configure utils in Sep" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(9)" icon="fa fa-cogs" label="Configure utils in Sep" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(10)" icon="fa fa-cogs" label="Configure utils in Nov" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Month3(11)" icon="fa fa-cogs" label="Configure utils in Dec" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Events()" icon="fa fa-cogs" label="Configure Events" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Analyze()" icon="fa fa-cogs" label="Configure Cots v2" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="AnalyzeFacts()" icon="fa fa-cogs" label="Configure Facts v2" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="AnalyzePOs()" icon="fa fa-cogs" label="Configure POS v2" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="AnalyzeY()" icon="fa fa-cogs" label="Configure Cots v3" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="AnalyzeFactsY()" icon="fa fa-cogs" label="Configure Facts v3" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="AnalyzePOsY()" icon="fa fa-cogs" label="Configure POS v3" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="SetFacs()" icon="fa fa-cogs" label="Configure Facts v4" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="RemovePOS()" icon="fa fa-cogs" label="Remove POS" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="Upload1()" icon="fa fa-cogs" label="Configure FSH1" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Upload2()" icon="fa fa-cogs" label="Configure FSH2" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Upload3()" icon="fa fa-cogs" label="Configure FSH3" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Upload4()" icon="fa fa-cogs" label="Configure FSHGBICS" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Upload5()" icon="fa fa-cogs" label="Configure FSHPOW" style="cursor:pointer;float:left;"></button>
+    <button type="button" pButton (click)="Upload6()" icon="fa fa-cogs" label="Configure FSHAP" style="cursor:pointer;float:left;"></button>
+    <br/><br/><br/><br/>
+    <button type="button" pButton (click)="DebugT()" icon="fa fa-cogs" label="DebugFacts" style="cursor:pointer;float:left;"></button>
+</p-fieldset>
