@@ -1,9 +1,9 @@
 import { Component,NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http';
+import * as firebase from "firebase";
 import 'rxjs/add/operator/map';
 import {Message} from 'primeng/primeng';
-import * as firebase from "firebase";
 import {Conns} from './../../Conections/Connection';
 @Component({
     selector: 'app-root',
