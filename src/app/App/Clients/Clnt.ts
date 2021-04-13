@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
     styleUrls: ['./../../Frame.css'],
     providers: [ConfirmationService]
 })
-export class Client{
+export class Clnt{
     I:MenuItem[]=[];Pro:any[]=[];States:SelectItem[]=[];Cont:string[]=[];G:Message []=[];B:Array<{ID:number, Nom:'', Cargo:string,Tel:Array<{ID:number,Tel:string, T:string}>, Mail:Array<{ID:number,Mail:string,T:string}>}>=[];Cels:Array<{ID:number,Cel:string[]}>=[];Mails:string[]=[];
     Nm:string='';Dir:string='';Ra:string='';C:string='';Estado:string='';ID:string;CP:string='';RFC:string='';ena:boolean=true;Conts:string; Edit:boolean=false;USR:string='';Tel:string='';
     D:Array<{Bank:string, Succ:string, Dir:string, Acc:string, Clab:string, Ref:string, K:boolean, ID:number}>=[];Col:string='';

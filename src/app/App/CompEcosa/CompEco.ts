@@ -14,7 +14,7 @@ import {PDFLIB} from './../../PdfTools/PdfLib/PDFLib';
     styleUrls: ['./../../Frame.css'],
     providers: [ConfirmationService]
 })
-export class ComprasEco{
+export class CompEco{
     Ori:any[]=[];Gen:any[];Tbl:number;G:Message []=[];States:SelectItem[]=[];Dis=false;T;b;
     items:Array<{Nm:Array<{A:string}>}>=[];Koins:SelectItem[]=[];Send:any[];P2:any[]=[];
     Kolors:SelectItem[]=[{label:'Sin atender', value:0},{label:'En proceso', value:2},{label:'Completadas', value:1},{label:'Todas', value:-1}];
