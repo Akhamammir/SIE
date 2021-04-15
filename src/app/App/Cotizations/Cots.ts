@@ -15,7 +15,7 @@ import {PDFLIB} from './../../PdfTools/PdfLib/PDFLib';
     styleUrls: ['./../../Frame.css'],
     providers: [ConfirmationService]
 })
-export class Cot{
+export class Cots{
     G:Message []=[];ID:string;User:string[]=[];N:number;T:string='';E:string='';At:string='';Dir:string='';Tel:string='';Fx:string='';Em:string='';
     B:Array<{Nom:string,ID:number, SubT:number, SubU:number, D:Array<{Cant:number,Unit:string,Desc:string,Prov:string,CInicial:number,CFact:number,Dcto:number,Utilidad:number,Ctot:number,DeliveryC:number,DeliveryCF:number,DeliveryT:string, CommCot:string, Comm:string, UNet:number, Koin:string, TC:number, Fin:number, ID:number,Complex:boolean,C:Array<{PartN:string,Des:string,Cto:number,TC:number,Fin:number}>}>}>=[];
     X:Array<{Ro:string,fill:string}>=[];value:boolean=false;selectedValue: string='pesos';Coin:string='';USR:string='';TcS:string='';

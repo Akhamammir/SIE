@@ -5,7 +5,7 @@ import {SelectItem, Message, MenuItem, ConfirmationService} from 'primeng/primen
 import {Conns} from './../../Conections/Connection';
 import * as firebase from "firebase";
 import 'rxjs/add/operator/map';
-import { Cot } from '../Cotizations/Cots';
+import { Cots } from '../Cotizations/Cots';
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'app-root',

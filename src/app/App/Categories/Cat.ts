@@ -10,9 +10,9 @@ import 'rxjs/add/operator/map';
     styleUrls: ['./../../Frame.css'],
     providers: [ConfirmationService]
 })
-export class Cats{
+export class Cat{
     G:Message []=[];I:MenuItem[]=[];Dis:boolean=false;
-    Cats:any[]=[];F:string;E:string;Ori:any[]=[]; exists:boolean=true;ID:string;Usr:string='';
+    Cat:any[]=[];F:string;E:string;Ori:any[]=[]; exists:boolean=true;ID:string;Usr:string='';
     constructor(private H:Http, private R:Router, private c:ConfirmationService, private r:ActivatedRoute){
         this.Categorizer();
     }
@@ -26,7 +26,7 @@ export class Cats{
                 this.Ori.push(I);
             });
         }).subscribe();
-        this.Cats=this.Ori;
+        this.Cat=this.Ori;
     }
     Adder(){
         let h = new Headers();
@@ -78,7 +78,7 @@ export class Cats{
         this.ID=id;
     }
     Filter(){
-        this.Cats = this.Ori.filter(I => I.Name.includes(this.F));
-        this.exists = this.Cats.length > 0 ? true : false;
+        this.Cat = this.Ori.filter(I => I.Name.includes(this.F));
+        this.exists = this.Cat.length > 0 ? true : false;
     }
 }

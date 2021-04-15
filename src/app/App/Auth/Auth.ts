@@ -13,7 +13,7 @@ import {PDFLIB} from './../../PdfTools/PdfLib/PDFLib';
     styleUrls: ['./../../Frame.css'],
     providers: [ConfirmationService]
 })
-export class Authalog{
+export class Auth{
     G:Message []=[];I:MenuItem[]=[];Cots:any[]=[];Ori:any[]=[];USR:string='';F:string[]=[];
     A:any[]=[];Co:boolean;Coin:string='0';Atn:string;Client:string[]=[];Color:number=3;
     X:string[]=[];User:string[]=[];Exe:string;Cols:any[];

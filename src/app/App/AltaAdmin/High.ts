@@ -15,7 +15,7 @@ declare let pdfMake;
     styleUrls: ['./../../Frame.css'],
     providers: [ConfirmationService]
 })
-export class Alta{
+export class High{
     Ori:any[]=[];Gen:any[];Tbl:number;G:Message []=[];States:SelectItem[]=[];Dis=false;
     items:Array<{Nm:Array<{A:string}>}>=[];Koins:SelectItem[]=[];Send:any[];M:Hash={}
     Kolors:SelectItem[]=[{label:'Sin atender', value:0},{label:'En proceso', value:2},{label:'Completadas', value:1},{label:'Todas', value:-1}];

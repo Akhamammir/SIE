@@ -22,10 +22,71 @@ import { Http, Headers } from '@angular/http';
 import {Input,OnInit,EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {MenuItem} from 'primeng/primeng';
+import { Delving } from './App/Deliveries/Delving';
+import { High } from './App/AltaAdmin/High';
+import { Auth } from './App/Auth/Auth';
+import { Cat } from './App/Categories/Cat';
+import { DelvingCli } from './App/ClientDeliveries/DelvingCli';
+import { Clnt } from './App/Clients/Clnt';
+import { CompEco } from './App/CompEcosa/CompEco';
+import { Comp } from './App/Compras/Comp';
+import { Cots } from './App/Cotizations/Cots';
+import { Links } from './App/Enlaces/Lnk';
+import { Envios } from './App/Envios/Env';
+import { EnviosEc } from './App/EnviosEcosa/EnvEc';
+import { EnviosEco } from './App/EnviosEcosta/EnvEco';
+import { Fact } from './App/Facturacion/Facting';
+import { Fac } from './App/Facturas/Fact';
+import { ComprasG } from './App/Kardex/CompG';
+import { Catalog } from './App/ListCots/Gen';
+import { FactalogComponent } from './App/ListFacts/GenF';
+import { Pactalog } from './App/ListPO/GenP';
+import { CatalogR } from './App/ListRelation/GenR';
+import { CatalogRem } from './App/ListRem/GenRem';
+import { Prods } from './App/Products/Prod';
+import { Provs } from './App/Providers/Prov';
+import { Remmits } from './App/Remmit/Remmit';
+import { Rols } from './App/Roles/Roles';
+import { Ticketeer } from './App/Ticketeer/Ticketeer';
+import { TCatalog } from './App/Ticketlist/TList';
+import { Ticketup } from './App/TicketUp/Ticketup';
+import { Users } from './App/Users/Usr';
 const Aroute: Routes =[
-  {path: 'main', component: Main},
-  {path: '', component:Login, children:[]}
+    {path: 'main', component: Main},
+    {path: '', component: Login, children:[]},
+    {path: 'altaadmin', component: High},
+    {path: 'auth', component: Auth},
+    {path: 'categories', component: Cat},
+    {path: 'clientdeliveries', component: DelvingCli},
+    {path: 'clients', component: Clnt},
+    {path: 'compecosa', component: CompEco},
+    {path: 'compras', component: Comp},
+    {path: 'cotizations', component: Cots},
+    {path: 'dashboard', component: Main},
+    {path: 'deliveries', component: Delving},
+    {path: 'enlaces', component: Links},
+    {path: 'envios', component: Envios},
+    {path: 'enviosecosa', component: EnviosEc},
+    {path: 'enviosecosta', component: EnviosEco},
+    {path: 'facturacion', component: Fact},
+    {path: 'facturas',component: Fac},
+    {path: 'kardex', component: ComprasG},
+    {path: 'listcots', component: Catalog},
+    {path: 'listfacts', component: FactalogComponent},
+    {path: 'listpo', component: Pactalog},
+    {path: 'listrelation', component: CatalogR},
+    {path: 'listrem', component: CatalogRem},
+    {path: 'login', component: Login},
+    {path: 'products', component: Prods},
+    {path: 'providers', component: Provs},
+    {path: 'remmit', component: Remmits},
+    {path: 'roles', component: Rols},
+    {path: 'ticketeer', component: Ticketeer},
+    {path: 'ticketlist', component: TCatalog},
+    {path: 'ticketup', component: Ticketup},
+    {path: 'users', component: Users},
 ];
+
 @Component({
     encapsulation: ViewEncapsulation.None,
   selector: 'app-root',
