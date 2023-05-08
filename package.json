@@ -42,7 +42,7 @@
     "font-awesome": "^4.7.0",
     "formidable": "^1.1.1",
     "fullcalendar": "4.0.0-alpha",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "js-sha512": "^0.8.0",
     "mailgun-js": "^0.14.2",
     "moment": "^2.22.2",
